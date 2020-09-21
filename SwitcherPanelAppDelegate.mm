@@ -530,6 +530,7 @@ finish:
 	
 	[mProgramInputsPopup removeAllItems];
 	[mPreviewInputsPopup removeAllItems];
+    mNumberOfInputs = 0;
 
 	while (S_OK == inputIterator->Next(&input))
 	{
@@ -544,6 +545,8 @@ finish:
 		
 		[mPreviewInputsPopup addItemWithTitle:name];
 		[[mPreviewInputsPopup lastItem] setTag:id];
+        
+        mNumberOfInputs++;
 		
 		input->Release();
 		[name release];
@@ -676,7 +679,8 @@ finish:
     [self performSelectorOnMainThread:@selector(postOSCStatus:) withObject:status waitUntilDone:NO];
 }
 
--(void) oscDispatchTransition:(NSString*) which arg:(CGFloat)arg {
+-(void) oscDispatchTransition:(NSString*) which arg:(CGFloat)arg
+{
     if ( mMixEffectBlock != NULL ) {
         
         if ( [which isEqualToString:@"auto"] ) {
@@ -704,16 +708,23 @@ finish:
     }   // <- mMixEffectBlock != NULL
 }
 
--(void) oscDispatchPreview:(NSInteger) which {
+-(void) oscDispatchPreview:(NSInteger) which
+{
     if ( mMixEffectBlock != NULL ) {
 
         NSInteger index = which - 1;
-        if (( which > 0 ) && ( index < [mPreviewInputsPopup numberOfItems] )) {
-            BMDSwitcherInputId selectedPreviewInput = [[mPreviewInputsPopup itemAtIndex:index] tag];
-            mMixEffectBlock->SetPreviewInput(selectedPreviewInput);
+        if (( which > 0 ) && ( index < mNumberOfInputs )) {
+            [self performSelectorOnMainThread:@selector(doSelectPreview:) withObject:[NSNumber numberWithInteger:index] waitUntilDone:NO];
         }
         
     }   // <- mMixEffectBlock != NULL
+}
+
+-(void) doSelectPreview:(NSNumber*) index
+{
+    // note tags are just index of preview so the need to get them may not be necessary
+    BMDSwitcherInputId selectedPreviewInput = [[mPreviewInputsPopup itemAtIndex:[index integerValue]] tag];
+    mMixEffectBlock->SetPreviewInput(selectedPreviewInput);
 }
 
 @end

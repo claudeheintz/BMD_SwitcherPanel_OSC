@@ -56,6 +56,7 @@ class InputMonitor;
     IBOutlet NSButton*          mOSCButton;
     IBOutlet NSTextField*       mOSCPortTextField;
     IBOutlet NSTextField*       mOSCStatusField;
+    NSInteger mNumberOfInputs;
 
 	IBMDSwitcherDiscovery*		mSwitcherDiscovery;
 	IBMDSwitcher*				mSwitcher;
