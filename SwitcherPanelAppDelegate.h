@@ -26,7 +26,6 @@
 */
 
 #import "BMDSwitcherAPI.h"
-#import "LXOSCInterfaceDelegate.h"
 #import <list>
 
 #import <Cocoa/Cocoa.h>
@@ -35,7 +34,7 @@ class MixEffectBlockMonitor;
 class SwitcherMonitor;
 class InputMonitor;
 
-@interface SwitcherPanelAppDelegate : NSObject <NSApplicationDelegate, LXOSCInterfaceDelegate>
+@interface SwitcherPanelAppDelegate : NSObject <NSApplicationDelegate>
 {
 	NSWindow *window;
 	
@@ -77,8 +76,6 @@ class InputMonitor;
 - (IBAction)programPopupChanged:(id)sender;
 - (IBAction)previewPopupChanged:(id)sender;
 - (IBAction)sliderChanged:(id)sender;
-
-- (IBAction) oscStartStop:(id)sender;
 
 - (void)switcherConnected;
 - (void)switcherDisconnected;
