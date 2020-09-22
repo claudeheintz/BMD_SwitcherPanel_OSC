@@ -1,0 +1,12 @@
+/* 
+  interface.strings
+  SwitcherPanel
+*/
+
+"Start"="Start";
+"Stop"="Stop";
+"OK"="OK";
+
+"No response from Switcher"="No response from Switcher";
+"Switcher has incompatible firmware"="Switcher has incompatible firmware";
+"Connection failed for unknown reason"="Connection failed for unknown reason";

@@ -15,6 +15,8 @@
 		513E49562516816300299FDC /* LXOSCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 513E49512516816300299FDC /* LXOSCMessage.m */; };
 		513E49572516816300299FDC /* LXOSCArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = 513E49522516816300299FDC /* LXOSCArgument.m */; };
 		513E49582516816300299FDC /* LXOSCTCPInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 513E49532516816300299FDC /* LXOSCTCPInterface.m */; };
+		51771D0C251A717200C673CF /* NSValue_Type_Float.m in Sources */ = {isa = PBXBuildFile; fileRef = 51771D0B251A717200C673CF /* NSValue_Type_Float.m */; };
+		51771D0F251A783700C673CF /* interface.strings in Resources */ = {isa = PBXBuildFile; fileRef = 51771D0E251A783700C673CF /* interface.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		97C373021488610E0019D5E9 /* BMDSwitcherAPIDispatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97C373011488610E0019D5E9 /* BMDSwitcherAPIDispatch.cpp */; };
@@ -42,6 +44,9 @@
 		513E49512516816300299FDC /* LXOSCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LXOSCMessage.m; path = osc/LXOSCMessage.m; sourceTree = "<group>"; };
 		513E49522516816300299FDC /* LXOSCArgument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LXOSCArgument.m; path = osc/LXOSCArgument.m; sourceTree = "<group>"; };
 		513E49532516816300299FDC /* LXOSCTCPInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LXOSCTCPInterface.m; path = osc/LXOSCTCPInterface.m; sourceTree = "<group>"; };
+		51771D0A251A717200C673CF /* NSValue_Type_Float.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NSValue_Type_Float.h; path = osc/NSValue_Type_Float.h; sourceTree = "<group>"; };
+		51771D0B251A717200C673CF /* NSValue_Type_Float.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NSValue_Type_Float.m; path = osc/NSValue_Type_Float.m; sourceTree = "<group>"; };
+		51771D0E251A783700C673CF /* interface.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = interface.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* SwitcherPanel-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SwitcherPanel-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* SwitcherPanel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwitcherPanel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97C373001488610E0019D5E9 /* BMDSwitcherAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BMDSwitcherAPI.h; path = ../../include/BMDSwitcherAPI.h; sourceTree = SOURCE_ROOT; };
@@ -123,6 +128,7 @@
 			children = (
 				8D1107310486CEB800E47090 /* SwitcherPanel-Info.plist */,
 				513E49372516651C00299FDC /* InfoPlist.strings */,
+				51771D0E251A783700C673CF /* interface.strings */,
 				513E49352516651C00299FDC /* MainMenu.xib */,
 			);
 			name = Resources;
@@ -152,6 +158,8 @@
 				513E49512516816300299FDC /* LXOSCMessage.m */,
 				513E49492516816300299FDC /* LXOSCTCPInterface.h */,
 				513E49532516816300299FDC /* LXOSCTCPInterface.m */,
+				51771D0A251A717200C673CF /* NSValue_Type_Float.h */,
+				51771D0B251A717200C673CF /* NSValue_Type_Float.m */,
 			);
 			name = OSC;
 			sourceTree = "<group>";
@@ -212,6 +220,7 @@
 			files = (
 				513E49392516651C00299FDC /* MainMenu.xib in Resources */,
 				513E493A2516651C00299FDC /* InfoPlist.strings in Resources */,
+				51771D0F251A783700C673CF /* interface.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +235,7 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				513E49542516816300299FDC /* CTNetUtilities.m in Sources */,
 				513E49572516816300299FDC /* LXOSCArgument.m in Sources */,
+				51771D0C251A717200C673CF /* NSValue_Type_Float.m in Sources */,
 				513E49562516816300299FDC /* LXOSCMessage.m in Sources */,
 				256AC3DA0F4B6AC300CF3369 /* SwitcherPanelAppDelegate.mm in Sources */,
 				97C373021488610E0019D5E9 /* BMDSwitcherAPIDispatch.cpp in Sources */,

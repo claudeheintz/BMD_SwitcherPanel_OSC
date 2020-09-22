@@ -32,6 +32,7 @@
 
 #import "LXOSCInterface.h"
 #import "LXOSCMessage.h"
+#import "NSValue_Type_Float.h"
 
 static inline bool	operator== (const REFIID& iid1, const REFIID& iid2)
 { 
@@ -295,7 +296,7 @@ private:
 	{
 		NSAlert* alert = [[NSAlert alloc] init];
 		[alert setMessageText:@"Could not create Switcher Discovery Instance.\nATEM Switcher Software may not be installed.\n"];
-		[alert addButtonWithTitle:@"OK"];
+		[alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
 		[alert beginSheetModalForWindow:window completionHandler:^(NSModalResponse returnCode) {
 			[NSApp terminate:self];
 		}];
@@ -352,17 +353,17 @@ private:
 		switch (failReason)
 		{
 			case bmdSwitcherConnectToFailureNoResponse:
-				reason = @"No response from Switcher";
+				reason = NSLocalizedString(@"No response from Switcher", nil);
 				break;
 			case bmdSwitcherConnectToFailureIncompatibleFirmware:
-				reason = @"Switcher has incompatible firmware";
+				reason = NSLocalizedString(@"Switcher has incompatible firmware", nil);
 				break;
 			default:
-				reason = @"Connection failed for unknown reason";
+				reason = NSLocalizedString(@"Connection failed for unknown reason", nil);
 		}
-		NSAlert* alert = [[NSAlert alloc] init];
+		NSAlert* alert = [[[NSAlert alloc] init] autorelease];
 		[alert setMessageText:reason];
-		[alert addButtonWithTitle:@"OK"];
+		[alert addButtonWithTitle:NSLocalizedString(@"OK", nil)];
 		[alert beginSheetModalForWindow:window completionHandler:nullptr];
 	}
 }
@@ -406,12 +407,12 @@ private:
 - (IBAction) oscStartStop:(id)sender {
     if ( [LXOSCInterface sharedOSCInterface] ) {
         [LXOSCInterface closeSharedOSCInterface];
-        [mOSCButton setTitle:@"Start"];
+        [mOSCButton setTitle:NSLocalizedString(@"Start", nil)];
     } else {
         int port = [mOSCPortTextField intValue];
         [LXOSCInterface initSharedInterfaceWithAddress:@"0.0.0.0" port:port serviceName:@"BMD_Switcher" delegate:self];
         
-        [mOSCButton setTitle:@"Stop"];
+        [mOSCButton setTitle:NSLocalizedString(@"Stop", nil)];
     }
 }
 
@@ -633,7 +634,7 @@ finish:
 
 #pragma mark OSCInterface Delegate
 
--(void) oscMessageReceived:(LXOSCMessage *)msg {
+-(void) oscMessageReceived:(LXOSCMessage *) msg {
     NSArray* addressPattern = [msg addressPattern];
     NSInteger apParts = [addressPattern count];
     
@@ -689,56 +690,71 @@ finish:
     [self performSelectorOnMainThread:@selector(postOSCStatus:) withObject:status waitUntilDone:NO];
 }
 
--(void) oscDispatchTransition:(NSString*) which arg:(CGFloat)arg
-{
+-(void) oscDispatchTransition:(NSString*) which arg:(CGFloat)arg {
     if ( mMixEffectBlock != NULL ) {
-        
+
         if ( [which isEqualToString:@"auto"] ) {
-            if ( arg == 1.0 ) {
-                mMixEffectBlock->PerformAutoTransition();
-            }
+            [self performSelectorOnMainThread:@selector(doPerformTransition:) withObject:[NSValue valuewithType:TRANSITION_TYPE_AUTO floatValue:arg] waitUntilDone:NO];
         } else if ( [which isEqualToString:@"cut"] ) {
-            if ( arg == 1.0 ) {
-                mMixEffectBlock->PerformCut();
-            }
+            [self performSelectorOnMainThread:@selector(doPerformTransition:) withObject:[NSValue valuewithType:TRANSITION_TYPE_CUT floatValue:arg] waitUntilDone:NO];
         } else if ( [which isEqualToString:@"ftb"] ) {
-            if ( arg == 1.0 ) {
-                mMixEffectBlock->PerformFadeToBlack();
-            }
+            [self performSelectorOnMainThread:@selector(doPerformTransition:) withObject:[NSValue valuewithType:TRANSITION_TYPE_FTB floatValue:arg] waitUntilDone:NO];
         } else if ( [which isEqualToString:@"position"] ) {
-            if ( arg == 1.0 ) {
-                if (mMoveSliderDownwards) {
-                    mMixEffectBlock->SetTransitionPosition(1.0-arg);
-                } else {
-                    mMixEffectBlock->SetTransitionPosition(arg);
-                }
-            }
+            [self performSelectorOnMainThread:@selector(doPerformTransition:) withObject:[NSValue valuewithType:TRANSITION_TYPE_FADE floatValue:arg] waitUntilDone:NO];
         }
         
     }   // <- mMixEffectBlock != NULL
 }
 
--(void) oscDispatchPreview:(NSInteger) which
-{
+-(void) doPerformTransition:(NSValue*) v {
+    TypeFloatPair pair = v.typeFloatPairValue;
+    switch ( pair.type ) {
+        case TRANSITION_TYPE_CUT:
+            if ( pair.value == 1.0 ) {
+                mMixEffectBlock->PerformCut();
+            }
+            break;
+            
+        case TRANSITION_TYPE_AUTO:
+            if ( pair.value == 1.0 ) {
+                mMixEffectBlock->PerformAutoTransition();
+            }
+            break;
+            
+        case TRANSITION_TYPE_FTB:
+            if ( pair.value == 1.0 ) {
+                mMixEffectBlock->PerformFadeToBlack();
+            }
+            break;
+            
+        case TRANSITION_TYPE_FADE:
+            if (mMoveSliderDownwards) {
+                mMixEffectBlock->SetTransitionPosition(1.0-pair.value);
+            } else {
+                mMixEffectBlock->SetTransitionPosition(pair.value);
+            }
+            break;
+    }
+}
+
+-(void) oscDispatchPreview:(NSInteger) which {
     if ( mMixEffectBlock != NULL ) {
 
         NSInteger index = which - 1;
         if (( which > 0 ) && ( index < mNumberOfInputs )) {
             [self performSelectorOnMainThread:@selector(doSelectPreview:) withObject:[NSNumber numberWithInteger:index] waitUntilDone:NO];
         }
-        
+    
     }   // <- mMixEffectBlock != NULL
 }
 
--(void) doSelectPreview:(NSNumber*) index
-{
+-(void) doSelectPreview:(NSNumber*) index {
     // note tags are just index of preview so the need to get them may not be necessary
     BMDSwitcherInputId previewID = [[mPreviewInputsPopup itemAtIndex:[index integerValue]] tag];
     mMixEffectBlock->SetPreviewInput(previewID);
 }
 
--(void) oscDispatchProgram:(NSInteger) which
-{
+-(void) oscDispatchProgram:(NSInteger) which {
     if ( mMixEffectBlock != NULL ) {
 
         NSInteger index = which - 1;

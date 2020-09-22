@@ -637,7 +637,7 @@ NSInteger nextIndexForIndex(NSInteger index) {
             }
         }
 		
-		[pool release];
+		[pool release]; // releases oscmessage
 	} else {
 		outindex = -1;
         [self.delegate oscInterfaceError:@"OSC message format error: at least one argument expected. (ignored)" level:LXOSCINTERFACE_MSG_INFO];
