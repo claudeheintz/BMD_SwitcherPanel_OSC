@@ -662,6 +662,16 @@ finish:
                         [self oscDispatchPreview:[msg integerAtIndex:0]];
                     }
                 }
+                
+                // /bmd/switcher/program/N [1.0]
+                // /bmd/switcher/program   [N]
+                else if ( [[addressPattern objectAtIndex:2] isEqualToString:@"program"] ) {
+                    if ( apParts == 4 ) {
+                        [self oscDispatchProgram:[[addressPattern objectAtIndex:3] integerValue]];
+                    } else if ( apParts == 4 ) {
+                        [self oscDispatchProgram:[msg integerAtIndex:0]];
+                    }
+                }
             }
         }
     }
@@ -723,8 +733,27 @@ finish:
 -(void) doSelectPreview:(NSNumber*) index
 {
     // note tags are just index of preview so the need to get them may not be necessary
-    BMDSwitcherInputId selectedPreviewInput = [[mPreviewInputsPopup itemAtIndex:[index integerValue]] tag];
-    mMixEffectBlock->SetPreviewInput(selectedPreviewInput);
+    BMDSwitcherInputId previewID = [[mPreviewInputsPopup itemAtIndex:[index integerValue]] tag];
+    mMixEffectBlock->SetPreviewInput(previewID);
+}
+
+-(void) oscDispatchProgram:(NSInteger) which
+{
+    if ( mMixEffectBlock != NULL ) {
+
+        NSInteger index = which - 1;
+        if (( which > 0 ) && ( index < mNumberOfInputs )) {
+            [self performSelectorOnMainThread:@selector(doSelectProgram:) withObject:[NSNumber numberWithInteger:index] waitUntilDone:NO];
+        }
+        
+    }   // <- mMixEffectBlock != NULL
+}
+
+-(void) doSelectProgram:(NSNumber*) index
+{
+    // note tags are just index of preview so the need to get them may not be necessary
+    BMDSwitcherInputId programID = [[mPreviewInputsPopup itemAtIndex:[index integerValue]] tag];
+    mMixEffectBlock->SetProgramInput(programID);
 }
 
 @end
