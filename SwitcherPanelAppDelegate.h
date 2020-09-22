@@ -93,8 +93,3 @@ class InputMonitor;
 - (void)mixEffectBlockBoxSetEnabled:(bool)enabled;
 
 @end
-
-#define TRANSITION_TYPE_CUT     0
-#define TRANSITION_TYPE_AUTO    1
-#define TRANSITION_TYPE_FTB     2
-#define TRANSITION_TYPE_FADE    3

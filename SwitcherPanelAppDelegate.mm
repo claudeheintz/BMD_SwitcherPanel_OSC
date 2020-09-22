@@ -32,7 +32,6 @@
 
 #import "LXOSCInterface.h"
 #import "LXOSCMessage.h"
-#import "NSValue_Type_Float.h"
 
 static inline bool	operator== (const REFIID& iid1, const REFIID& iid2)
 { 
@@ -635,6 +634,12 @@ finish:
 #pragma mark OSCInterface Delegate
 
 -(void) oscMessageReceived:(LXOSCMessage *) msg {
+    // always dispatch the message on the main thread
+    // note, this can back up the main thread depending on the time it takes...
+    [self performSelectorOnMainThread:@selector(processOSCMessage:) withObject:msg waitUntilDone:NO];
+}
+
+-(void) processOSCMessage:(LXOSCMessage *) msg {
     NSArray* addressPattern = [msg addressPattern];
     NSInteger apParts = [addressPattern count];
     
@@ -694,46 +699,25 @@ finish:
     if ( mMixEffectBlock != NULL ) {
 
         if ( [which isEqualToString:@"auto"] ) {
-            [self performSelectorOnMainThread:@selector(doPerformTransition:) withObject:[NSValue valuewithType:TRANSITION_TYPE_AUTO floatValue:arg] waitUntilDone:NO];
-        } else if ( [which isEqualToString:@"cut"] ) {
-            [self performSelectorOnMainThread:@selector(doPerformTransition:) withObject:[NSValue valuewithType:TRANSITION_TYPE_CUT floatValue:arg] waitUntilDone:NO];
-        } else if ( [which isEqualToString:@"ftb"] ) {
-            [self performSelectorOnMainThread:@selector(doPerformTransition:) withObject:[NSValue valuewithType:TRANSITION_TYPE_FTB floatValue:arg] waitUntilDone:NO];
-        } else if ( [which isEqualToString:@"position"] ) {
-            [self performSelectorOnMainThread:@selector(doPerformTransition:) withObject:[NSValue valuewithType:TRANSITION_TYPE_FADE floatValue:arg] waitUntilDone:NO];
-        }
-        
-    }   // <- mMixEffectBlock != NULL
-}
-
--(void) doPerformTransition:(NSValue*) v {
-    TypeFloatPair pair = v.typeFloatPairValue;
-    switch ( pair.type ) {
-        case TRANSITION_TYPE_CUT:
-            if ( pair.value == 1.0 ) {
-                mMixEffectBlock->PerformCut();
-            }
-            break;
-            
-        case TRANSITION_TYPE_AUTO:
-            if ( pair.value == 1.0 ) {
+            if ( arg == 1.0 ) {
                 mMixEffectBlock->PerformAutoTransition();
             }
-            break;
-            
-        case TRANSITION_TYPE_FTB:
-            if ( pair.value == 1.0 ) {
+        } else if ( [which isEqualToString:@"cut"] ) {
+            if ( arg == 1.0 ) {
+                mMixEffectBlock->PerformCut();
+            }
+        } else if ( [which isEqualToString:@"ftb"] ) {
+            if ( arg == 1.0 ) {
                 mMixEffectBlock->PerformFadeToBlack();
             }
-            break;
-            
-        case TRANSITION_TYPE_FADE:
+        } else if ( [which isEqualToString:@"position"] ) {
             if (mMoveSliderDownwards) {
-                mMixEffectBlock->SetTransitionPosition(1.0-pair.value);
+                mMixEffectBlock->SetTransitionPosition(1.0-arg);
             } else {
-                mMixEffectBlock->SetTransitionPosition(pair.value);
+                mMixEffectBlock->SetTransitionPosition(arg);
             }
-            break;
+        }
+        
     }
 }
 
@@ -742,16 +726,11 @@ finish:
 
         NSInteger index = which - 1;
         if (( which > 0 ) && ( index < mNumberOfInputs )) {
-            [self performSelectorOnMainThread:@selector(doSelectPreview:) withObject:[NSNumber numberWithInteger:index] waitUntilDone:NO];
+            BMDSwitcherInputId previewID = [[mPreviewInputsPopup itemAtIndex:index] tag];
+            mMixEffectBlock->SetPreviewInput(previewID);
         }
     
     }   // <- mMixEffectBlock != NULL
-}
-
--(void) doSelectPreview:(NSNumber*) index {
-    // note tags are just index of preview so the need to get them may not be necessary
-    BMDSwitcherInputId previewID = [[mPreviewInputsPopup itemAtIndex:[index integerValue]] tag];
-    mMixEffectBlock->SetPreviewInput(previewID);
 }
 
 -(void) oscDispatchProgram:(NSInteger) which {
@@ -759,17 +738,11 @@ finish:
 
         NSInteger index = which - 1;
         if (( which > 0 ) && ( index < mNumberOfInputs )) {
-            [self performSelectorOnMainThread:@selector(doSelectProgram:) withObject:[NSNumber numberWithInteger:index] waitUntilDone:NO];
+            BMDSwitcherInputId programID = [[mPreviewInputsPopup itemAtIndex:index] tag];
+            mMixEffectBlock->SetProgramInput(programID);
         }
         
     }   // <- mMixEffectBlock != NULL
-}
-
--(void) doSelectProgram:(NSNumber*) index
-{
-    // note tags are just index of preview so the need to get them may not be necessary
-    BMDSwitcherInputId programID = [[mPreviewInputsPopup itemAtIndex:[index integerValue]] tag];
-    mMixEffectBlock->SetProgramInput(programID);
 }
 
 @end
