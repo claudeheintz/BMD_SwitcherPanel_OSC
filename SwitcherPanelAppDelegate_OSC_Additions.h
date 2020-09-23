@@ -13,16 +13,9 @@
 
 @interface SwitcherPanelAppDelegate (OSC_Additions) <LXOSCInterfaceDelegate>
 
-- (void) switcherConnected_SwitcherMediaPool;
-
-- (IBAction)mediaPlayerSourcePopupChanged:(id)sender;
-- (IBAction)beginButtonClicked:(id)sender;
-- (IBAction)previousButtonClicked:(id)sender;
-- (IBAction)playButtonClicked:(id)sender;
-- (IBAction)nextButtonClicked:(id)sender;
-- (IBAction)loopButtonClicked:(id)sender;
-
 - (IBAction) oscStartStop:(id)sender;
+
+-(void) oscDispatchTransition:(NSString*) which arg:(CGFloat)arg;
 
 @end
 

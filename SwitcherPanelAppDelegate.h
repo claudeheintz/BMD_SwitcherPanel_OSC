@@ -113,4 +113,22 @@ class ClipMonitor;
 - (void)updateFTBFramesTextField;
 - (void)mixEffectBlockBoxSetEnabled:(bool)enabled;
 
+// SwitcherMediaPool Example
+- (void) switcherConnected_SwitcherMediaPool;
+
+- (void) selectMediaPlayerSource:(uint32_t) mpIndex;
+
+- (void)onMediaPlayerSourceChanged;
+- (void)onMediaPlayerPlayingChanged;
+- (void)onMediaPlayerBeginChanged;
+- (void)onMediaPlayerLoopChanged;
+- (void)onStillClipNameValidChanged;
+
+- (IBAction)mediaPlayerSourcePopupChanged:(id)sender;
+- (IBAction)beginButtonClicked:(id)sender;
+- (IBAction)previousButtonClicked:(id)sender;
+- (IBAction)playButtonClicked:(id)sender;
+- (IBAction)nextButtonClicked:(id)sender;
+- (IBAction)loopButtonClicked:(id)sender;
+
 @end
