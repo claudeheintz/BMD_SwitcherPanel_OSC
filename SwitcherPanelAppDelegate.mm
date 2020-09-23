@@ -26,6 +26,8 @@
 */
 
 #import "SwitcherPanelAppDelegate.h"
+#import "SwitcherPanelAppDelegate_OSC_Additions.h"
+#import "CallbackMonitors.h"
 #include <libkern/OSAtomic.h>
 #include <os/atomic.h>
 #include <string>
@@ -297,6 +299,11 @@ private:
 			[NSApp terminate:self];
 		}];
 	}
+    
+    mStills = NULL;
+    mSwitcherMonitor = new SwitcherMonitor(self);
+    mMediaPlayer1Monitor = new MediaPlayerMonitor(self);
+    mStillsMonitor = new StillsMonitor(self);
 	
 	[self switcherDisconnected];		// start with switcher disconnected
 }
@@ -457,6 +464,8 @@ private:
 	[self updateSliderPosition];
 	[self updateTransitionFramesTextField];
 	[self updateFTBFramesTextField];
+    
+    [self switcherConnected_SwitcherMediaPool];
 	
 finish:
 	if (iterator)

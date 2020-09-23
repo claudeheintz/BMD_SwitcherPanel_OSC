@@ -27,12 +27,16 @@
 
 #import "BMDSwitcherAPI.h"
 #import <list>
+#include <vector>
 
 #import <Cocoa/Cocoa.h>
 
 class MixEffectBlockMonitor;
 class SwitcherMonitor;
 class InputMonitor;
+class MediaPlayerMonitor;
+class StillsMonitor;
+class ClipMonitor;
 
 @interface SwitcherPanelAppDelegate : NSObject <NSApplicationDelegate>
 {
@@ -52,6 +56,14 @@ class InputMonitor;
 	IBOutlet NSTextField*		mFTBFramesTextField;
 	IBOutlet NSLevelIndicator*	mLevelIndicator;
     
+//  additional from SwitcherMediaPool example
+    IBOutlet NSPopUpButton*     mMediaPlayerSourcePopup;
+    IBOutlet NSButton*          mMediaPlayerBeginButton;
+    IBOutlet NSButton*          mMediaPlayerPreviousButton;
+    IBOutlet NSButton*          mMediaPlayerPlayButton;
+    IBOutlet NSButton*          mMediaPlayerNextButton;
+    IBOutlet NSButton*          mMediaPlayerLoopButton;
+//  added for OSC
     IBOutlet NSButton*          mOSCButton;
     IBOutlet NSTextField*       mOSCPortTextField;
     IBOutlet NSTextField*       mOSCStatusField;
@@ -65,6 +77,18 @@ class InputMonitor;
 	std::list<InputMonitor*>	mInputMonitors;
 	bool						mMoveSliderDownwards;
 	bool						mCurrentTransitionReachedHalfway;
+    
+//  additional from SwitcherMediaPool example
+    std::vector<IBMDSwitcherMediaPlayer*>    mMediaPlayers;
+    IBMDSwitcherMediaPool*                   mMediaPool;
+    IBMDSwitcherStills*                      mStills;
+    std::vector<IBMDSwitcherClip*>           mClips;
+    //StillTransfer*                           mStillTransfer;
+    //std::vector<ClipTransfer*>               mClipTransfers;
+    
+    MediaPlayerMonitor*                      mMediaPlayer1Monitor;
+    StillsMonitor*                           mStillsMonitor;
+    std::vector<ClipMonitor*>                mClipMonitors;
 }
 
 @property (assign) IBOutlet NSWindow *window;

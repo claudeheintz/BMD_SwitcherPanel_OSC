@@ -17,6 +17,7 @@
 		513E49582516816300299FDC /* LXOSCTCPInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 513E49532516816300299FDC /* LXOSCTCPInterface.m */; };
 		51771D0F251A783700C673CF /* interface.strings in Resources */ = {isa = PBXBuildFile; fileRef = 51771D0E251A783700C673CF /* interface.strings */; };
 		51771D14251A892D00C673CF /* SwitcherPanelAppDelegate_OSC_Additions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 51771D13251A892D00C673CF /* SwitcherPanelAppDelegate_OSC_Additions.mm */; };
+		51E72BC4251BC03600F8C943 /* CallbackMonitors.mm in Sources */ = {isa = PBXBuildFile; fileRef = 51E72BC3251BC03600F8C943 /* CallbackMonitors.mm */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		97C373021488610E0019D5E9 /* BMDSwitcherAPIDispatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97C373011488610E0019D5E9 /* BMDSwitcherAPIDispatch.cpp */; };
@@ -47,6 +48,8 @@
 		51771D0E251A783700C673CF /* interface.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = interface.strings; sourceTree = "<group>"; };
 		51771D12251A892D00C673CF /* SwitcherPanelAppDelegate_OSC_Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitcherPanelAppDelegate_OSC_Additions.h; sourceTree = "<group>"; };
 		51771D13251A892D00C673CF /* SwitcherPanelAppDelegate_OSC_Additions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SwitcherPanelAppDelegate_OSC_Additions.mm; sourceTree = "<group>"; };
+		51E72BC2251BC03600F8C943 /* CallbackMonitors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallbackMonitors.h; sourceTree = "<group>"; };
+		51E72BC3251BC03600F8C943 /* CallbackMonitors.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CallbackMonitors.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* SwitcherPanel-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SwitcherPanel-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* SwitcherPanel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwitcherPanel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97C373001488610E0019D5E9 /* BMDSwitcherAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BMDSwitcherAPI.h; path = ../../include/BMDSwitcherAPI.h; sourceTree = SOURCE_ROOT; };
@@ -109,7 +112,6 @@
 				513E49252516642D00299FDC /* OSC */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = SwitcherPanel;
@@ -118,6 +120,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				51E72BC2251BC03600F8C943 /* CallbackMonitors.h */,
+				51E72BC3251BC03600F8C943 /* CallbackMonitors.mm */,
 				97C373001488610E0019D5E9 /* BMDSwitcherAPI.h */,
 				97C373011488610E0019D5E9 /* BMDSwitcherAPIDispatch.cpp */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
@@ -132,6 +136,7 @@
 				513E49372516651C00299FDC /* InfoPlist.strings */,
 				51771D0E251A783700C673CF /* interface.strings */,
 				513E49352516651C00299FDC /* MainMenu.xib */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				51771D14251A892D00C673CF /* SwitcherPanelAppDelegate_OSC_Additions.mm in Sources */,
 				513E49552516816300299FDC /* LXOSCInterface.m in Sources */,
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				51E72BC4251BC03600F8C943 /* CallbackMonitors.mm in Sources */,
 				513E49542516816300299FDC /* CTNetUtilities.m in Sources */,
 				513E49572516816300299FDC /* LXOSCArgument.m in Sources */,
 				513E49562516816300299FDC /* LXOSCMessage.m in Sources */,
