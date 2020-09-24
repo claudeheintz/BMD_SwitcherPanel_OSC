@@ -48,6 +48,7 @@
 		51771D0E251A783700C673CF /* interface.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = interface.strings; sourceTree = "<group>"; };
 		51771D12251A892D00C673CF /* SwitcherPanelAppDelegate_OSC_Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitcherPanelAppDelegate_OSC_Additions.h; sourceTree = "<group>"; };
 		51771D13251A892D00C673CF /* SwitcherPanelAppDelegate_OSC_Additions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SwitcherPanelAppDelegate_OSC_Additions.mm; sourceTree = "<group>"; };
+		51AA0D36251CE80000C747F2 /* SwitcherPanel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwitcherPanel.entitlements; sourceTree = "<group>"; };
 		51E72BC2251BC03600F8C943 /* CallbackMonitors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallbackMonitors.h; sourceTree = "<group>"; };
 		51E72BC3251BC03600F8C943 /* CallbackMonitors.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CallbackMonitors.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* SwitcherPanel-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SwitcherPanel-Info.plist"; sourceTree = "<group>"; };
@@ -108,6 +109,7 @@
 		29B97314FDCFA39411CA2CEA /* SwitcherPanel */ = {
 			isa = PBXGroup;
 			children = (
+				51AA0D36251CE80000C747F2 /* SwitcherPanel.entitlements */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				513E49252516642D00299FDC /* OSC */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -197,6 +199,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					8D1107260486CEB800E47090 = {
+						DevelopmentTeam = T95243XU48;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "SwitcherPanel" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -276,8 +284,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_ENTITLEMENTS = SwitcherPanel.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 20D0924;
+				DEVELOPMENT_TEAM = T95243XU48;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -286,8 +299,10 @@
 				INFOPLIST_FILE = "SwitcherPanel-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blackmagic-design.switchers.sdk.switcherpanel";
 				PRODUCT_NAME = SwitcherPanel;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -296,16 +311,23 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_ENTITLEMENTS = SwitcherPanel.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 20D0924;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = T95243XU48;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = SwitcherPanel_Prefix.pch;
 				INFOPLIST_FILE = "SwitcherPanel-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blackmagic-design.switchers.sdk.switcherpanel";
 				PRODUCT_NAME = SwitcherPanel;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
