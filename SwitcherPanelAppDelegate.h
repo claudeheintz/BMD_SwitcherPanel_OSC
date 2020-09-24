@@ -124,6 +124,11 @@ class ClipMonitor;
 - (void)onMediaPlayerLoopChanged;
 - (void)onStillClipNameValidChanged;
 
+- (void)onStillsLockObtained;
+- (void)onClipLockObtained:(NSNumber *)clipIndex;
+- (void)onStillsTransferEnded:(NSNumber *)enabled;
+- (void)onClipTransferEnded:(NSArray *)args;
+
 - (IBAction)mediaPlayerSourcePopupChanged:(id)sender;
 - (IBAction)beginButtonClicked:(id)sender;
 - (IBAction)previousButtonClicked:(id)sender;

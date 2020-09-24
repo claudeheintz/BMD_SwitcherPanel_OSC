@@ -26,7 +26,7 @@
 */
 
 #include "CallbackMonitors.h"
-#include <libkern/OSAtomic.h>
+#include <os/atomic.h>
 
 // IIDs are defined in a way that prevents us from using CFEqual, so we overload the == operator
 static inline bool operator== (const REFIID& iid1, const REFIID& iid2)
@@ -67,12 +67,18 @@ HRESULT MediaPlayerCallback::QueryInterface(REFIID iid, LPVOID *ppv)
 
 ULONG MediaPlayerCallback::AddRef(void)
 {
-	return ::OSAtomicIncrement32(&mRefCount);
+    return os_atomic_std(atomic_fetch_add_explicit)(
+                                                     os_cast_to_atomic_pointer(&mRefCount), 1,
+                                                     os_atomic_std(memory_order_relaxed));
+	//return ::OSAtomicIncrement32(&mRefCount);
 }
 
 ULONG MediaPlayerCallback::Release(void)
 {
-	int newCount = ::OSAtomicDecrement32(&mRefCount);
+    int newCount = os_atomic_std(atomic_fetch_sub_explicit)(
+                                                            os_cast_to_atomic_pointer(&mRefCount), 1,
+                                                            os_atomic_std(memory_order_relaxed));
+	//int newCount = ::OSAtomicDecrement32(&mRefCount);
 	if (newCount == 0)
 		delete this;
 	return newCount;
@@ -185,12 +191,18 @@ HRESULT StillsCallback::QueryInterface(REFIID iid, LPVOID *ppv)
 
 ULONG StillsCallback::AddRef(void)
 {
-	return ::OSAtomicIncrement32(&mRefCount);
+    return os_atomic_std(atomic_fetch_add_explicit)(
+                                                     os_cast_to_atomic_pointer(&mRefCount), 1,
+                                                     os_atomic_std(memory_order_relaxed));
+	//return ::OSAtomicIncrement32(&mRefCount);
 }
 
 ULONG StillsCallback::Release(void)
 {
-	int newCount = ::OSAtomicDecrement32(&mRefCount);
+    int newCount = os_atomic_std(atomic_fetch_sub_explicit)(
+                                                            os_cast_to_atomic_pointer(&mRefCount), 1,
+                                                            os_atomic_std(memory_order_relaxed));
+	//int newCount = ::OSAtomicDecrement32(&mRefCount);
 	if (newCount == 0)
 		delete this;
 	return newCount;
@@ -306,12 +318,18 @@ HRESULT ClipCallback::QueryInterface(REFIID iid, LPVOID *ppv)
 
 ULONG ClipCallback::AddRef(void)
 {
-	return ::OSAtomicIncrement32(&mRefCount);
+    return os_atomic_std(atomic_fetch_add_explicit)(
+                                                     os_cast_to_atomic_pointer(&mRefCount), 1,
+                                                     os_atomic_std(memory_order_relaxed));
+	//return ::OSAtomicIncrement32(&mRefCount);
 }
 
 ULONG ClipCallback::Release(void)
 {
-	int newCount = ::OSAtomicDecrement32(&mRefCount);
+    int newCount = os_atomic_std(atomic_fetch_sub_explicit)(
+                                                            os_cast_to_atomic_pointer(&mRefCount), 1,
+                                                            os_atomic_std(memory_order_relaxed));
+	//int newCount = ::OSAtomicDecrement32(&mRefCount);
 	if (newCount == 0)
 		delete this;
 	return newCount;
@@ -443,12 +461,18 @@ HRESULT LockCallback::QueryInterface(REFIID iid, LPVOID *ppv)
 
 ULONG LockCallback::AddRef(void)
 {
-	return ::OSAtomicIncrement32(&mRefCount);
+    return os_atomic_std(atomic_fetch_add_explicit)(
+                                                     os_cast_to_atomic_pointer(&mRefCount), 1,
+                                                     os_atomic_std(memory_order_relaxed));
+	//return ::OSAtomicIncrement32(&mRefCount);
 }
 
 ULONG LockCallback::Release(void)
 {
-	int newCount = ::OSAtomicDecrement32(&mRefCount);
+    int newCount = os_atomic_std(atomic_fetch_sub_explicit)(
+                                                            os_cast_to_atomic_pointer(&mRefCount), 1,
+                                                            os_atomic_std(memory_order_relaxed));
+	//int newCount = ::OSAtomicDecrement32(&mRefCount);
 	if (newCount == 0)
 		delete this;
 	return newCount;
@@ -507,7 +531,10 @@ HRESULT SwitcherCallback::QueryInterface(REFIID iid, LPVOID *ppv)
 
 ULONG SwitcherCallback::AddRef(void)
 {
-	return ::OSAtomicIncrement32(&mRefCount);
+    return os_atomic_std(atomic_fetch_add_explicit)(
+                                                  os_cast_to_atomic_pointer(&mRefCount), 1,
+                                                  os_atomic_std(memory_order_relaxed));
+	//return ::OSAtomicIncrement32(&mRefCount);
 }
 
 ULONG SwitcherCallback::Release(void)

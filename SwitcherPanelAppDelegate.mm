@@ -473,6 +473,8 @@ finish:
 
 - (void)switcherDisconnected
 {
+    [self enableMediaPlayerButtons:false];
+    
 	[mConnectButton setEnabled:YES];			// enable connect button so user can re-connect
 	[mSwitcherNameLabel setStringValue:@""];
 	
@@ -491,6 +493,35 @@ finish:
 		mMixEffectBlock->Release();
 		mMixEffectBlock = NULL;
 	}
+    
+    // <--- begin from SwitcherMediaPool cleanupConnection
+    
+    while (mMediaPlayers.size())
+    {
+        mMediaPlayers.back()->Release();
+        mMediaPlayers.pop_back();
+    }
+    
+    while (mClips.size())
+    {
+        mClips.back()->Release();
+        mClips.pop_back();
+    }
+    
+    if (mStills)
+    {
+        mStills->Release();
+        mStills = NULL;
+    }
+    
+    if (mMediaPool)
+    {
+        mMediaPool->Release();
+        mMediaPool = NULL;
+    }
+    
+    // <--- end from SwitcherMediaPool cleanupConnection
+    
 	
 	if (mSwitcher)
 	{
@@ -750,98 +781,6 @@ finish:
     
 }
 
-- (void)onMediaPlayerSourceChanged
-{
-    // the source has changed
-    
-    // update the selected source
-    [self updateMediaPlayerPopupSelection];
-}
-
-- (void)onMediaPlayerPlayingChanged
-{
-    // the switcher has notified us that the playing property has changed
-    
-    bool playing;
-    HRESULT result;
-    
-    // check we have media player 1
-    if (mMediaPlayers.size() < 1)
-    {
-        NSLog(@"No media player 1\n");
-        return;
-    }
-    
-    // get the playing property
-    result = mMediaPlayers[0]->GetPlaying(&playing);
-    if (FAILED(result))
-    {
-        NSLog(@"Could not get playing\n");
-        return;
-    }
-    
-    // update the state of the button
-    [mMediaPlayerPlayButton setState:playing];
-}
-
-- (void)onMediaPlayerBeginChanged
-{
-    // the switcher has notified us that the 'at beginning' property has changed
-    
-    bool atBegining;
-    HRESULT result;
-    
-    // check we have media player 1
-    if (mMediaPlayers.size() < 1)
-    {
-        NSLog(@"No media player 1\n");
-        return;
-    }
-    
-    // get the 'at beginning' property
-    result = mMediaPlayers[0]->GetAtBeginning(&atBegining);
-    if (FAILED(result))
-    {
-        NSLog(@"Could not get 'at beginning'\n");
-        return;
-    }
-    
-    // update the state of the button
-    [mMediaPlayerBeginButton setState:atBegining];
-}
-
-- (void)onMediaPlayerLoopChanged
-{
-    // the switcher has notified us that the loop property has changed
-    
-    bool loop;
-    HRESULT result;
-    
-    // check we have media player 1
-    if (mMediaPlayers.size() < 1)
-    {
-        NSLog(@"No media player 1\n");
-        return;
-    }
-    
-    // get the loop property
-    result = mMediaPlayers[0]->GetLoop(&loop);
-    if (FAILED(result))
-    {
-        NSLog(@"Could not get loop\n");
-        return;
-    }
-    
-    // update the state of the button
-    [mMediaPlayerLoopButton setState:loop];
-}
-
-- (void)onStillClipNameValidChanged
-{
-    // We could update only the item that has changed, but this is simpler
-    [self updateMediaPopupItems:mMediaPlayerSourcePopup];
-}
-
 - (void)updateMediaPopupItems:(NSPopUpButton*)comboBox;
 {
     HRESULT result;
@@ -1003,6 +942,122 @@ finish:
     
     [self enableMediaPlayerButtons:valid];
 }
+
+#pragma mark MediaPlayer callbacks
+
+- (void)onMediaPlayerSourceChanged
+{
+    // the source has changed
+    
+    // update the selected source
+    [self updateMediaPlayerPopupSelection];
+}
+
+- (void)onMediaPlayerPlayingChanged
+{
+    // the switcher has notified us that the playing property has changed
+    
+    bool playing;
+    HRESULT result;
+    
+    // check we have media player 1
+    if (mMediaPlayers.size() < 1)
+    {
+        NSLog(@"No media player 1\n");
+        return;
+    }
+    
+    // get the playing property
+    result = mMediaPlayers[0]->GetPlaying(&playing);
+    if (FAILED(result))
+    {
+        NSLog(@"Could not get playing\n");
+        return;
+    }
+    
+    // update the state of the button
+    [mMediaPlayerPlayButton setState:playing];
+}
+
+- (void)onMediaPlayerBeginChanged
+{
+    // the switcher has notified us that the 'at beginning' property has changed
+    
+    bool atBegining;
+    HRESULT result;
+    
+    // check we have media player 1
+    if (mMediaPlayers.size() < 1)
+    {
+        NSLog(@"No media player 1\n");
+        return;
+    }
+    
+    // get the 'at beginning' property
+    result = mMediaPlayers[0]->GetAtBeginning(&atBegining);
+    if (FAILED(result))
+    {
+        NSLog(@"Could not get 'at beginning'\n");
+        return;
+    }
+    
+    // update the state of the button
+    [mMediaPlayerBeginButton setState:atBegining];
+}
+
+- (void)onMediaPlayerLoopChanged
+{
+    // the switcher has notified us that the loop property has changed
+    
+    bool loop;
+    HRESULT result;
+    
+    // check we have media player 1
+    if (mMediaPlayers.size() < 1)
+    {
+        NSLog(@"No media player 1\n");
+        return;
+    }
+    
+    // get the loop property
+    result = mMediaPlayers[0]->GetLoop(&loop);
+    if (FAILED(result))
+    {
+        NSLog(@"Could not get loop\n");
+        return;
+    }
+    
+    // update the state of the button
+    [mMediaPlayerLoopButton setState:loop];
+}
+
+- (void)onStillClipNameValidChanged
+{
+    // We could update only the item that has changed, but this is simpler
+    [self updateMediaPopupItems:mMediaPlayerSourcePopup];
+}
+
+- (void)onStillsLockObtained
+{
+    // transfer not implemented
+}
+
+- (void)onClipLockObtained:(NSNumber *)clipIndex
+{
+    // transfer not implemented
+}
+
+- (void)onStillsTransferEnded:(NSNumber *)enabled
+{
+    // transfer not implemented
+}
+
+- (void)onClipTransferEnded:(NSArray *)args
+{
+    // transfer not implemented
+}
+
+#pragma mark MediaPlayer IBActions
 
 - (IBAction)mediaPlayerSourcePopupChanged:(id)sender
 {
@@ -1228,6 +1283,5 @@ finish:
         return;
     }
 }
-
 
 @end
