@@ -26,7 +26,7 @@
 */
 
 #include "CallbackMonitors.h"
-#include <os/atomic.h>
+#include <stdatomic.h>
 
 // IIDs are defined in a way that prevents us from using CFEqual, so we overload the == operator
 static inline bool operator== (const REFIID& iid1, const REFIID& iid2)
@@ -67,17 +67,13 @@ HRESULT MediaPlayerCallback::QueryInterface(REFIID iid, LPVOID *ppv)
 
 ULONG MediaPlayerCallback::AddRef(void)
 {
-    return os_atomic_std(atomic_fetch_add_explicit)(
-                                                     os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                     os_atomic_std(memory_order_relaxed));
+    return atomic_fetch_add_explicit( (atomic_int *)&mRefCount, 1, memory_order_relaxed);
 	//return ::OSAtomicIncrement32(&mRefCount);
 }
 
 ULONG MediaPlayerCallback::Release(void)
 {
-    int newCount = os_atomic_std(atomic_fetch_sub_explicit)(
-                                                            os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                            os_atomic_std(memory_order_relaxed));
+    int newCount = atomic_fetch_sub_explicit((atomic_int*)&mRefCount, 1, memory_order_relaxed);
 	//int newCount = ::OSAtomicDecrement32(&mRefCount);
 	if (newCount == 0)
 		delete this;
@@ -191,17 +187,13 @@ HRESULT StillsCallback::QueryInterface(REFIID iid, LPVOID *ppv)
 
 ULONG StillsCallback::AddRef(void)
 {
-    return os_atomic_std(atomic_fetch_add_explicit)(
-                                                     os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                     os_atomic_std(memory_order_relaxed));
+    return atomic_fetch_add_explicit( (atomic_int *)&mRefCount, 1, memory_order_relaxed);
 	//return ::OSAtomicIncrement32(&mRefCount);
 }
 
 ULONG StillsCallback::Release(void)
 {
-    int newCount = os_atomic_std(atomic_fetch_sub_explicit)(
-                                                            os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                            os_atomic_std(memory_order_relaxed));
+    int newCount = atomic_fetch_sub_explicit((atomic_int*)&mRefCount, 1, memory_order_relaxed);
 	//int newCount = ::OSAtomicDecrement32(&mRefCount);
 	if (newCount == 0)
 		delete this;
@@ -318,17 +310,13 @@ HRESULT ClipCallback::QueryInterface(REFIID iid, LPVOID *ppv)
 
 ULONG ClipCallback::AddRef(void)
 {
-    return os_atomic_std(atomic_fetch_add_explicit)(
-                                                     os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                     os_atomic_std(memory_order_relaxed));
+    return atomic_fetch_add_explicit( (atomic_int *)&mRefCount, 1, memory_order_relaxed);
 	//return ::OSAtomicIncrement32(&mRefCount);
 }
 
 ULONG ClipCallback::Release(void)
 {
-    int newCount = os_atomic_std(atomic_fetch_sub_explicit)(
-                                                            os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                            os_atomic_std(memory_order_relaxed));
+    int newCount = atomic_fetch_sub_explicit((atomic_int*)&mRefCount, 1, memory_order_relaxed);
 	//int newCount = ::OSAtomicDecrement32(&mRefCount);
 	if (newCount == 0)
 		delete this;
@@ -461,17 +449,13 @@ HRESULT LockCallback::QueryInterface(REFIID iid, LPVOID *ppv)
 
 ULONG LockCallback::AddRef(void)
 {
-    return os_atomic_std(atomic_fetch_add_explicit)(
-                                                     os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                     os_atomic_std(memory_order_relaxed));
+    return atomic_fetch_add_explicit( (atomic_int *)&mRefCount, 1, memory_order_relaxed);
 	//return ::OSAtomicIncrement32(&mRefCount);
 }
 
 ULONG LockCallback::Release(void)
 {
-    int newCount = os_atomic_std(atomic_fetch_sub_explicit)(
-                                                            os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                            os_atomic_std(memory_order_relaxed));
+    int newCount = atomic_fetch_sub_explicit((atomic_int*)&mRefCount, 1, memory_order_relaxed);
 	//int newCount = ::OSAtomicDecrement32(&mRefCount);
 	if (newCount == 0)
 		delete this;

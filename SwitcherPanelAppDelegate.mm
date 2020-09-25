@@ -28,7 +28,7 @@
 #import "SwitcherPanelAppDelegate.h"
 #import "CallbackMonitors.h"
 #include <libkern/OSAtomic.h>
-#include <os/atomic.h>
+#include <stdatomic.h>
 #include <string>
 
 static inline bool	operator== (const REFIID& iid1, const REFIID& iid2)
@@ -71,17 +71,13 @@ public:
 
 	ULONG STDMETHODCALLTYPE AddRef(void)
 	{
-        return  os_atomic_std(atomic_fetch_add_explicit)(
-                                                         os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                         os_atomic_std(memory_order_relaxed));
+        return  atomic_fetch_add_explicit((atomic_int*)&mRefCount, 1, memory_order_relaxed );
 		//return ::OSAtomicIncrement32(&mRefCount);
 	}
 
 	ULONG STDMETHODCALLTYPE Release(void)
 	{
-        int newCount = os_atomic_std(atomic_fetch_sub_explicit)(
-                                                                os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                                os_atomic_std(memory_order_relaxed));
+        int newCount = atomic_fetch_sub_explicit((atomic_int*)&mRefCount, 1, memory_order_relaxed);
 		//int newCount = ::OSAtomicDecrement32(&mRefCount);
 		if (newCount == 0)
 			delete this;
@@ -166,17 +162,13 @@ public:
 
 	ULONG STDMETHODCALLTYPE AddRef(void)
 	{
-        return  os_atomic_std(atomic_fetch_add_explicit)(
-                                                         os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                         os_atomic_std(memory_order_relaxed));
+        return  atomic_fetch_add_explicit((atomic_int*)&mRefCount, 1, memory_order_relaxed );
 		//return ::OSAtomicIncrement32(&mRefCount);
 	}
 
 	ULONG STDMETHODCALLTYPE Release(void)
 	{
-        int newCount = os_atomic_std(atomic_fetch_sub_explicit)(
-                                                                os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                                os_atomic_std(memory_order_relaxed));
+        int newCount = atomic_fetch_sub_explicit((atomic_int*)&mRefCount, 1, memory_order_relaxed);
         //int newCount = ::OSAtomicDecrement32(&mRefCount);
 		if (newCount == 0)
 			delete this;
@@ -239,17 +231,13 @@ public:
 
 	ULONG STDMETHODCALLTYPE AddRef(void)
 	{
-        return  os_atomic_std(atomic_fetch_add_explicit)(
-                                                         os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                         os_atomic_std(memory_order_relaxed));
+        return  atomic_fetch_add_explicit((atomic_int*)&mRefCount, 1, memory_order_relaxed );
 		//return ::OSAtomicIncrement32(&mRefCount);
 	}
 
 	ULONG STDMETHODCALLTYPE Release(void)
 	{
-        int newCount = os_atomic_std(atomic_fetch_sub_explicit)(
-                                                                os_cast_to_atomic_pointer(&mRefCount), 1,
-                                                                os_atomic_std(memory_order_relaxed));
+        int newCount = atomic_fetch_sub_explicit((atomic_int*)&mRefCount, 1, memory_order_relaxed);
         //int newCount = ::OSAtomicDecrement32(&mRefCount);
 		if (newCount == 0)
 			delete this;
