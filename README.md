@@ -1,5 +1,7 @@
 # Switcher Panel with OSC
 
+This project allows you to control a Blackmagic Design ATEM switcher using OSC from an app like TouchOSC or QLab.  The SwitcherPanel app runs on a Mac that is connected to the ATEM.  It listens for OSC messages on a specified network port and controls the ATEM accordingly.
+
 This project starts with the **SwitcherPanel** sample from Blackmagic_ATEM_Switchers_SDK_8.4 and adds media selection capability from the SDK's **SwitcherMediaPool** example. Most importantly, it also adds the ability to control the app (and through the app an ATEM) using OSC.
 
 To use the app, you'll need to download and install the ATEM software from **https://www.blackmagicdesign.com/support/** along with the contents of this repository.
