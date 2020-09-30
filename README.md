@@ -12,38 +12,38 @@ The **/extras** folder contains a layout for TouchOSC and a workspace for QLab t
 
 The OSC address patterns that the switcherPanel app responds to are listed below.  Brackets eg. [1.0] list arguments contained in the OSC message with the given address pattern.  Float arguments of 1.0 are required to trigger some actions in order to be compatible with an OSC application that sends a message with 1.0 when a button is pressed and 0.0 when the button is released.
 
-   BMD SwitcherPanel OSC Messages:
+BMD SwitcherPanel OSC Messages:
 
-   `/bmd/switcher/transition/auto [float 1.0]`
-       Triggers an auto transition as if the the Auto button on the ATEM was pressed.
-       
-    `/bmd/switcher/transition/cut [float 1.0]`
-       Triggers a cut transition as if the the Cut button on the ATEM was pressed.
+`/bmd/switcher/transition/auto [float 1.0]`  
+   Triggers an auto transition as if the the Auto button on the ATEM was pressed.  
+   
+`/bmd/switcher/transition/cut [float 1.0]`  
+   Triggers a cut transition as if the the Cut button on the ATEM was pressed.  
 
-   `/bmd/switcher/transition/ftb [float 1.0]`
-       Triggers a cut transition as if the the FTB button on the ATEM was pressed.
+`/bmd/switcher/transition/ftb [float 1.0]`  
+   Triggers a cut transition as if the the FTB button on the ATEM was pressed.  
 
-   `/bmd/switcher/transition/position [float P = 0.0-1.0]`
-       Sets the progress of the transition slider from 0 to 100%
-       as determined by the float argument.
+`/bmd/switcher/transition/position [float P = 0.0-1.0]`  
+   Sets the progress of the transition slider from 0 to 100%  
+   as determined by the float argument.  
 
-   `/bmd/switcher/preview/N [float 1.0]`
-       Selects input N as the preview source.
-       The number refers to the row in the popup list.
-       
-	`/bmd/switcher/preview  [integer N]`
-       Selects input N as the preview source.
-       The number refers to the row in the popup list.
-       
-    `/bmd/switcher/program/N [float 1.0]`
-       Selects input N as the program source.
-       The number refers to the row in the popup list.
-       
-	`/bmd/switcher/program  [integer N]`
-       Selects input N as the program source.
-       The number refers to the row in the popup list.
-       
-    `/bmd/switcher/media/select N [float 1.0]`
-       Selects slot N from the media pool.
-       The number refers to the row in the popup list.
+`/bmd/switcher/preview/N [float 1.0]`  
+   Selects input N as the preview source.  
+   The number refers to the row in the popup list.  
+   
+`/bmd/switcher/preview  [integer N]`  
+   Selects input N as the preview source.  
+   The number refers to the row in the popup list.  
+   
+`/bmd/switcher/program/N [float 1.0]`  
+   Selects input N as the program source.  
+   The number refers to the row in the popup list.  
+   
+`/bmd/switcher/program  [integer N]`  
+   Selects input N as the program source.  
+   The number refers to the row in the popup list.  
+   
+`/bmd/switcher/media/select N [float 1.0]`  
+   Selects slot N from the media pool.  
+   The number refers to the row in the popup list.  
 
