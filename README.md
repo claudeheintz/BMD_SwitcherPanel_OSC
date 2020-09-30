@@ -2,11 +2,13 @@
 
 This project starts with the SwitcherPanel sample from Blackmagic_ATEM_Switchers_SDK_8.4 and adds media selection capability from the SDK's SwitcherMediaPool example. Most importantly, it also adds the ability to control the app (and through the app an ATEM) using OSC.
 
-To use the app, you'll need to download and install the ATEM software from https://www.blackmagicdesign.com/support/ along with the contents of this repository.
+To use the app, you'll need to download and install the ATEM software from **https://www.blackmagicdesign.com/support/** along with the contents of this repository.
 
-To use the source code, you'll want to download the SDK from https://www.blackmagicdesign.com/developer/  Either clone or unzip the BMD_SwitcherPanel_OSC-master folder into Blackmagic_ATEM_Switchers_SDK_8.4/Samples
+To use the source code, you'll want to download the SDK from **https://www.blackmagicdesign.com/developer/**  Either clone or unzip the BMD_SwitcherPanel_OSC-master folder into Blackmagic_ATEM_Switchers_SDK_8.4/Samples
 
-There is also a copy of a pre-built SwitcherPanel application in the /app folder of the repository.
+The **/app** folder contains a zipped, pre-built SwitcherPanel application.
+  
+The **/extras** folder contains a layout for TouchOSC and a workspace for QLab that illustrate controlling the SwitcherPanel from these applications.
 
 The OSC address patterns that the switcherPanel app responds to are listed below.  Brackets eg. [1.0] list arguments contained in the OSC message with the given address pattern.  Float arguments of 1.0 are required to trigger some actions in order to be compatible with an OSC application that sends a message with 1.0 when a button is pressed and 0.0 when the button is released.
 
@@ -45,4 +47,3 @@ The OSC address patterns that the switcherPanel app responds to are listed below
        Selects slot N from the media pool.
        The number refers to the row in the popup list.
 
-  
