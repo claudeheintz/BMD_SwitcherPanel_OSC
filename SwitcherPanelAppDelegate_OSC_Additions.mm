@@ -72,7 +72,7 @@
                         if ( [msg floatAtIndex:0] == 1.0 ) {
                             [self oscDispatchPreview:[[addressPattern objectAtIndex:3] integerValue]];
                         }
-                    } else if ( apParts == 4 ) {
+                    } else if ( apParts == 3 ) {
                         [self oscDispatchPreview:[msg integerAtIndex:0]];
                     }
                 }
@@ -95,6 +95,16 @@
                             if ( [msg floatAtIndex:0] == 1.0 ) {
                                 [self oscDispatchMediaSelect:[[addressPattern objectAtIndex:4] integerValue]];
                             }
+                        }
+                    }
+                }
+                
+                else if ( [[addressPattern objectAtIndex:2] isEqualToString:@"go"] ) {
+                    if ( apParts == 4 ) {
+                        if ( [msg floatAtIndex:0] == 1.0 ) {
+                            [self oscDispatchPreview:[[addressPattern objectAtIndex:3] integerValue]];
+                            // delay??
+                            [self oscDispatchTransition:@"auto" arg:1.0];
                         }
                     }
                 }
@@ -141,11 +151,10 @@
     }
 }
 
--(void) oscDispatchPreview:(NSInteger) which {
+-(void) oscDispatchPreview:(NSInteger) index {
     if ( mMixEffectBlock != NULL ) {
 
-        NSInteger index = which - 1;
-        if (( which > 0 ) && ( index < mNumberOfInputs )) {
+        if (( index >= 0 ) && ( index < mNumberOfInputs )) {
             BMDSwitcherInputId previewID = [[mPreviewInputsPopup itemAtIndex:index] tag];
             mMixEffectBlock->SetPreviewInput(previewID);
         }
@@ -153,11 +162,10 @@
     }   // <- mMixEffectBlock != NULL
 }
 
--(void) oscDispatchProgram:(NSInteger) which {
+-(void) oscDispatchProgram:(NSInteger) index {
     if ( mMixEffectBlock != NULL ) {
 
-        NSInteger index = which - 1;
-        if (( which > 0 ) && ( index < mNumberOfInputs )) {
+        if (( index >= 0 ) && ( index < mNumberOfInputs )) {
             BMDSwitcherInputId programID = [[mPreviewInputsPopup itemAtIndex:index] tag];
             mMixEffectBlock->SetProgramInput(programID);
         }
@@ -165,8 +173,8 @@
     }   // <- mMixEffectBlock != NULL
 }
 
--(void) oscDispatchMediaSelect:(NSInteger) which {
-    [self selectMediaPlayerSource:(uint32_t)(which-1)]; //uses zero based index
+-(void) oscDispatchMediaSelect:(NSInteger) index {
+    [self selectMediaPlayerSource:(uint32_t)index]; //uses zero based index
 }
 
 @end

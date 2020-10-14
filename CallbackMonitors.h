@@ -177,6 +177,10 @@ private:
 };
 /*
 // Switcher callback class
+// these functions are implemented in SwitcherPanelAppDelegate in this example
+// rather than by this SwitcherCallback class as is the case in the SwitcherMediaPool example
+// which is where this file and corresponding .mm file came from
+ 
 class SwitcherCallback : public IBMDSwitcherCallback
 {
 public:

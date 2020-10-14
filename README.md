@@ -31,21 +31,26 @@ BMD SwitcherPanel OSC Messages:
 
 `/bmd/switcher/preview/N [float 1.0]`  
    Selects input N as the preview source.  
-   The number refers to the row in the popup list.  
+   The number refers to the row in the popup list,
+   starting with the first (black) as row zero. 
    
 `/bmd/switcher/preview  [integer N]`  
    Selects input N as the preview source.  
-   The number refers to the row in the popup list.  
+   The number refers to the row in the popup list,
+   starting with the first (black) as row zero. 
    
 `/bmd/switcher/program/N [float 1.0]`  
    Selects input N as the program source.  
-   The number refers to the row in the popup list.  
+   The number refers to the row in the popup list,
+   starting with the first (black) as row zero. 
    
 `/bmd/switcher/program  [integer N]`  
    Selects input N as the program source.  
-   The number refers to the row in the popup list.  
+   The number refers to the row in the popup list,
+   starting with the first (black) as row zero. 
    
 `/bmd/switcher/media/select N [float 1.0]`  
    Selects slot N from the media pool.  
-   The number refers to the row in the popup list.  
+   The number refers to the row in the popup list,
+   starting with the first (black) as row zero. 
 
