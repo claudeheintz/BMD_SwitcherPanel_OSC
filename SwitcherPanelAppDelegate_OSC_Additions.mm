@@ -108,6 +108,23 @@
                         }
                     }
                 }
+                
+                else if ( [[addressPattern objectAtIndex:2] isEqualToString:@"stream"] ) {
+                    if ( apParts == 4 ) {
+                        if ( [msg floatAtIndex:0] == 1.0 ) {
+                            [self oscDispatchStream:[addressPattern objectAtIndex:3]];
+                        }
+                    }
+                }
+                
+                else if ( [[addressPattern objectAtIndex:2] isEqualToString:@"record"] ) {
+                    if ( apParts == 4 ) {
+                        if ( [msg floatAtIndex:0] == 1.0 ) {
+                            [self oscDispatchRecord:[addressPattern objectAtIndex:3]];
+                        }
+                    }
+                }
+                
             }
         }
     }
@@ -175,6 +192,46 @@
 
 -(void) oscDispatchMediaSelect:(NSInteger) index {
     [self selectMediaPlayerSource:(uint32_t)index]; //uses zero based index
+}
+
+-(void) oscDispatchStream:(NSString*) action {
+    if ( mSwitcherStream != NULL ) {
+        
+        if ( [action isEqualToString:@"start"] )
+        {
+            mSwitcherStream->StartStreaming();
+        }
+        
+        else if ( [action isEqualToString:@"stop"] )
+        {
+            mSwitcherStream->StopStreaming();
+        }
+        
+    }
+}
+
+-(void) oscDispatchRecord:(NSString*) action {
+    if ( mSwitcherRecord != NULL ) {
+        
+        HRESULT result;
+        
+        if ( [action isEqualToString:@"start"] )
+        {
+            result = mSwitcherRecord->StartRecording();
+            if (FAILED(result)) {
+                [self oscInterfaceError:@"Record start failed" level:LXOSCINTERFACE_MSG_DIAGNOSTIC];
+            }
+        }
+        
+        else if ( [action isEqualToString:@"stop"] )
+        {
+            result = mSwitcherRecord->StopRecording();
+            if (FAILED(result)) {
+                [self oscInterfaceError:@"Record start failed" level:LXOSCINTERFACE_MSG_DIAGNOSTIC];
+            }
+        }
+        
+    }
 }
 
 @end

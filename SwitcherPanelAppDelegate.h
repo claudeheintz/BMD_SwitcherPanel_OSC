@@ -89,6 +89,10 @@ class ClipMonitor;
     MediaPlayerMonitor*                      mMediaPlayer1Monitor;
     StillsMonitor*                           mStillsMonitor;
     std::vector<ClipMonitor*>                mClipMonitors;
+    
+// additional recording/RTMP support
+    IBMDSwitcherStreamRTMP*                  mSwitcherStream;
+    IBMDSwitcherRecordAV*                    mSwitcherRecord;
 }
 
 @property (assign) IBOutlet NSWindow *window;

@@ -269,6 +269,8 @@ private:
 	mSwitcherDiscovery = NULL;
 	mSwitcher = NULL;
 	mMixEffectBlock = NULL;
+    mSwitcherStream = NULL;
+    mSwitcherRecord = NULL;
 	
 	mSwitcherMonitor = new SwitcherMonitor(self);
 	mMixEffectBlockMonitor = new MixEffectBlockMonitor(self);
@@ -293,8 +295,6 @@ private:
     mStillsMonitor = new StillsMonitor(self);
 	
 	[self switcherDisconnected];		// start with switcher disconnected
-    
-    NSLog(@"_%f", ((CGFloat)0x100000000L));
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification
@@ -302,8 +302,10 @@ private:
 	mSwitcherMonitor->Release();
 	mSwitcherMonitor = NULL;
 	
-	mMixEffectBlockMonitor->Release();
-	mMixEffectBlockMonitor = NULL;
+    if ( mMixEffectBlockMonitor ) {
+        mMixEffectBlockMonitor->Release();
+        mMixEffectBlockMonitor = NULL;
+    }
 
 	if (mSwitcherDiscovery)
 	{
@@ -454,7 +456,8 @@ private:
 	[self updateTransitionFramesTextField];
 	[self updateFTBFramesTextField];
     
-    [self switcherConnected_SwitcherMediaPool];
+    [self switcherConnected_SwitcherMediaPool];     //initializes intterface to media pool & stills
+    [self switcherConnected_RecordStream];          //initializes interface to IBMDSwitcherStreamRTMP and IBMDSwitcherRecordAV
 	
 finish:
 	if (iterator)
@@ -512,7 +515,20 @@ finish:
     
     // <--- end from SwitcherMediaPool cleanupConnection
     
-	
+    // <--- begin stream/record cleanupConnection
+    
+    if ( mSwitcherStream ) {
+        mSwitcherStream->Release();
+        mSwitcherStream = NULL;
+    }
+    
+    if ( mSwitcherRecord) {
+        mSwitcherRecord->Release();
+        mSwitcherRecord = NULL;
+    }
+    
+    // <--- end stream/record cleanupConnection
+    
 	if (mSwitcher)
 	{
 		mSwitcher->RemoveCallback(mSwitcherMonitor);
@@ -931,6 +947,26 @@ finish:
     }
     
     [self enableMediaPlayerButtons:valid];
+}
+
+#pragma mark record/stream
+
+- (void)switcherConnected_RecordStream
+{
+    HRESULT result;
+    
+    result = mSwitcher->QueryInterface(IID_IBMDSwitcherStreamRTMP, (void**)&mSwitcherStream);
+    if (FAILED(result))
+    {
+        NSLog(@"Could not get IBMDSwitcherStreamRTMP interface\n");
+    }
+    
+    result = mSwitcher->QueryInterface(IID_IBMDSwitcherRecordAV, (void**)&mSwitcherRecord);
+    if (FAILED(result))
+    {
+        NSLog(@"Could not get IID_IBMDSwitcherRecordAV interface\n");
+    }
+    
 }
 
 #pragma mark MediaPlayer callbacks
