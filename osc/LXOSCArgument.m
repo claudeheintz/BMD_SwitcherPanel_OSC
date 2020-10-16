@@ -10,6 +10,7 @@
  */
 
 #import "LXOSCArgument.h"
+#import "CTNetUtilities.h"
 
 @implementation LXOSCArgument
 
@@ -57,13 +58,15 @@
     return self;
 }
 
--(id) initWithTimestamp:(double) d {
+-(id) initWithTimestamp:(long) d {
     self = [super init];
     
     if ( self ) {
         self.type = LXOSC_ARGTYPE_TIMESTAMP;
-        self.dv = d;
-        self.sv = [NSString stringWithFormat:@"%f", d];
+        self.dv = NTP2TimeInterval(d);
+        self.sv = [NSDateFormatter localizedStringFromDate:[NSDate dateWithTimeIntervalSince1970:self.dv]
+                                                 dateStyle:NSDateFormatterMediumStyle
+                                                 timeStyle:NSDateFormatterShortStyle];
         self.bv = NULL;
     }
     
@@ -217,6 +220,13 @@
 
 -(NSNumber*) numberValue {
     return [NSNumber numberWithDouble:self.dv];
+}
+
+-(NSString*) stringValue {
+    if ( self.sv ) {
+        return self.sv;
+    }
+    return @"";
 }
 
 @end

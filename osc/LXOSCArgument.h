@@ -53,7 +53,7 @@
 -(id) initWithInt:(int) d;
 -(id) initWithFloat:(float) d;
 -(id) initWithDouble:(double) d;
--(id) initWithTimestamp:(double) d;
+-(id) initWithTimestamp:(long) d;
 -(id) initWithString:(NSString*) d;
 -(id) initWithData:(NSData*) d;
 -(id) initWithType:(uint8_t) t;

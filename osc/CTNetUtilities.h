@@ -70,4 +70,4 @@ void extractIPV4FromSockStruct(struct sockaddr_in sadr, uint8_t* result);
 NSArray* getNetIPAddresses(void);
 NSString* getBroadcastAddressForAddress(NSString* addr);
 
-
+NSTimeInterval NTP2TimeInterval(long ntptime);

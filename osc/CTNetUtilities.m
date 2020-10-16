@@ -234,5 +234,23 @@ NSString* getBroadcastAddressForAddress(NSString* addr) {
     return NULL;
 }
 
-
+NSTimeInterval NTP2TimeInterval(long ntptime) {      //NTP time is milliseconds from 1/1/1900 or 2/7/2036
+    // see RFC-2030 (SNTP v4)
+    long msb0baseTime = 2085978496L;
+    long msb1baseTime = -2208988800L;
+    
+    long secondbits   = (ntptime >> 32) & 0xffffffffL;  //upper 32 bits
+    long fractionbits = ntptime & 0xffffffffL;          //lower 32 bits
+    // convert fraction to seconds
+    CGFloat fraction = round (fractionbits / ((CGFloat)0x100000000L) );
+    
+    long msb = secondbits & 0x80000000L;
+    if (msb == 0) {
+        // use base: 7-Feb-2036 @ 06:28:16 UTC
+        return msb0baseTime + secondbits + fraction;
+    }
+    
+    // use base: 1-Jan-1900 @ 01:00:00 UTC
+    return msb1baseTime + secondbits + fraction;
+}
 

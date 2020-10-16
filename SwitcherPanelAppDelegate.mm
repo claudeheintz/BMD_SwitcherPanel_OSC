@@ -293,6 +293,8 @@ private:
     mStillsMonitor = new StillsMonitor(self);
 	
 	[self switcherDisconnected];		// start with switcher disconnected
+    
+    NSLog(@"_%f", ((CGFloat)0x100000000L));
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification
