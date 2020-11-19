@@ -295,6 +295,23 @@ private:
     mStillsMonitor = new StillsMonitor(self);
 	
 	[self switcherDisconnected];		// start with switcher disconnected
+    
+    // ADDED TO STANDARD SAMPLE, using defaults to save switcher IP address and port
+    
+    NSUserDefaults * prefs  = [NSUserDefaults standardUserDefaults];
+    
+    NSString* pathToDefaultDefaults = [[NSBundle mainBundle] pathForResource:@"user_defaults" ofType:@"plist"];
+    NSMutableDictionary * defaultPrefs = [NSMutableDictionary dictionaryWithContentsOfFile: pathToDefaultDefaults];
+    [prefs registerDefaults: defaultPrefs];
+    
+    NSString* switcherDefaultAddress = [prefs objectForKey:@"SWITCHER_ADDRESS"];
+    if ( switcherDefaultAddress ) {
+        [mAddressTextField setStringValue:switcherDefaultAddress];
+    }
+    NSString* switcherDefaultOSCPort = [prefs objectForKey:@"OSC_PORT"];
+    if ( switcherDefaultOSCPort ) {
+        [mOSCPortTextField setStringValue:switcherDefaultOSCPort];
+    }
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification
@@ -326,6 +343,8 @@ private:
 - (IBAction)connectButtonPressed:(id)sender
 {
 	NSString* address = [mAddressTextField stringValue];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:address forKey:@"SWITCHER_ADDRESS"];
 	
 	BMDSwitcherConnectToFailure			failReason;
 	
