@@ -245,6 +245,32 @@
     }
 }
 
+#pragma mark record/stream
+
+- (IBAction)recordStartButtonPressed:(id)sender {
+    if ( mSwitcherRecord != NULL ) {
+        mSwitcherRecord->StartRecording();
+    }
+}
+
+- (IBAction)recordStopButtonPressed:(id)sender {
+    if ( mSwitcherRecord != NULL ) {
+        mSwitcherRecord->StopRecording();
+    }
+}
+
+- (IBAction)streamStartButtonPressed:(id)sender {
+    if ( mSwitcherStream != NULL ) {
+        mSwitcherStream->StartStreaming();
+    }
+}
+
+- (IBAction)streamStopButtonPressed:(id)sender {
+    if ( mSwitcherStream != NULL ) {
+        mSwitcherStream->StopStreaming();
+    }
+}
+
 
 #pragma mark bonjour menthods
 

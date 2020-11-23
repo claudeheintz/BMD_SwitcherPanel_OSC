@@ -97,6 +97,7 @@ class ClipMonitor;
 
 @property (assign) IBOutlet NSWindow *window;
 
+// added for MDNS search
 @property (retain) NSString* desiredName;
 @property (retain) NSNetServiceBrowser* browser;
 @property (retain) NSNetService* service;

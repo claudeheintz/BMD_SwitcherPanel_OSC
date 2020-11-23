@@ -14,6 +14,13 @@
 @interface SwitcherPanelAppDelegate (OSC_Additions) <LXOSCInterfaceDelegate, NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 
 - (IBAction) oscStartStop:(id)sender;
+
+
+- (IBAction)recordStartButtonPressed:(id)sender;
+- (IBAction)recordStopButtonPressed:(id)sender;
+- (IBAction)streamStartButtonPressed:(id)sender;
+- (IBAction)streamStopButtonPressed:(id)sender;
+
 - (IBAction) mdnsButtonPressed:(id)sender;
 
 -(void) oscDispatchTransition:(NSString*) which arg:(CGFloat)arg;
