@@ -307,7 +307,7 @@
 				INFOPLIST_FILE = "SwitcherPanel-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.4;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blackmagic-design.switchers.sdk.switcherpanelosc";
 				PRODUCT_NAME = SwitcherPanel;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -332,7 +332,7 @@
 				INFOPLIST_FILE = "SwitcherPanel-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.4;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blackmagic-design.switchers.sdk.switcherpanelosc";
 				PRODUCT_NAME = SwitcherPanel;
 				PROVISIONING_PROFILE_SPECIFIER = "";

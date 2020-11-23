@@ -21,6 +21,8 @@
 #include <termios.h>
 #include <arpa/inet.h>
 
+#include <string>
+
 @implementation SwitcherPanelAppDelegate (OSC_Additions)
 
 #pragma mark OSC Methods
@@ -271,12 +273,36 @@
     }
 }
 
+-(void) getStreamKey {
+    if ( mSwitcherStream != NULL ) {
+        NSString* keystring;
+        mSwitcherStream->GetKey((CFStringRef*)&keystring);
+        [mStreamKeyTextField setStringValue:keystring];
+    }
+}
+
+- (IBAction) streamKeyChanged:(id)sender {
+    if ( mSwitcherStream != NULL ) {
+        NSString* keystring = [mStreamKeyTextField stringValue];
+        mSwitcherStream->SetKey((CFStringRef)keystring);
+    }
+}
+
 
 #pragma mark bonjour menthods
 
 - (IBAction) mdnsButtonPressed:(id)sender {
-    if ( self.desiredName == NULL ) {
+    if ( ! self.browser ) {
         [self findSenderConnectionForName:@"*"];
+        [mOSCStatusField setStringValue:@"searching for switcher..."];
+        [mMDNSButton setTitle:@"Stop Search"];
+    } else {
+        [self disconnectService];
+        [self stopBrowser];
+        [mMDNSButton setTitle:@"Search with Bonjour"];
+        if ( [[mOSCStatusField stringValue] isEqualToString:@"searching for switcher..."] ) {
+            [mOSCStatusField setStringValue:@""];
+        }
     }
 }
 
@@ -286,7 +312,7 @@
         self.browser = [[[NSNetServiceBrowser alloc] init] autorelease];
         [self.browser setDelegate:self];
         [self.browser searchForServicesOfType:@"_blackmagic._tcp" inDomain:@""];
-        [mOSCStatusField setStringValue:@"searching for switcher..."];
+       
     }
 }
 
@@ -353,8 +379,8 @@
     }
     [mOSCStatusField setStringValue:msg];
 
-    [self disconnectService];
-    [self stopBrowser];
+    //[self disconnectService];
+    //[self stopBrowser];
 }
 
 

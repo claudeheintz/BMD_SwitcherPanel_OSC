@@ -105,15 +105,6 @@
                             <action selector="connectButtonPressed:" target="494" id="539"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="543">
-                        <rect key="frame" x="17" y="466" width="102" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Switcher Name:" id="544">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <box autoresizesSubviews="NO" fixedFrame="YES" borderType="line" title="Mix Effect Block 1" translatesAutoresizingMaskIntoConstraints="NO" id="549">
                         <rect key="frame" x="17" y="224" width="395" height="224"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -412,6 +403,27 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
+                                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Uc-qi-FLE">
+                                    <rect key="frame" x="99" y="94" width="157" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="hU4-hH-8Q4">
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <action selector="streamKeyChanged:" target="494" id="cl7-WI-ONy"/>
+                                    </connections>
+                                </textField>
+                                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xwP-er-DtE">
+                                    <rect key="frame" x="-9" y="93" width="102" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Stream Key:" id="pt0-dT-0Pj">
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
                             </subviews>
                         </view>
                     </box>
@@ -474,6 +486,15 @@
                             <action selector="mdnsButtonPressed:" target="494" id="2ql-9H-Tc4"/>
                         </connections>
                     </button>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="543">
+                        <rect key="frame" x="44" y="466" width="102" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Switcher Name:" id="544">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <point key="canvasLocation" x="-176" y="66.5"/>
@@ -487,6 +508,7 @@
                 <outlet property="mFTBButton" destination="566" id="586"/>
                 <outlet property="mFTBFramesTextField" destination="596" id="602"/>
                 <outlet property="mLevelIndicator" destination="604" id="610"/>
+                <outlet property="mMDNSButton" destination="lzr-Op-9Nn" id="oAw-pT-KRm"/>
                 <outlet property="mMediaPlayerBeginButton" destination="rGS-2f-4Ko" id="hei-N5-5OH"/>
                 <outlet property="mMediaPlayerLoopButton" destination="lgX-DW-svX" id="341-8J-Vc5"/>
                 <outlet property="mMediaPlayerNextButton" destination="ANX-xB-lie" id="iaq-kP-mDk"/>
@@ -500,6 +522,7 @@
                 <outlet property="mPreviewInputsPopup" destination="574" id="582"/>
                 <outlet property="mProgramInputsPopup" destination="568" id="581"/>
                 <outlet property="mSlider" destination="556" id="587"/>
+                <outlet property="mStreamKeyTextField" destination="7Uc-qi-FLE" id="uSD-8F-FyR"/>
                 <outlet property="mSwitcherNameLabel" destination="607" id="609"/>
                 <outlet property="mTransitionFramesTextField" destination="594" id="603"/>
                 <outlet property="window" destination="371" id="532"/>

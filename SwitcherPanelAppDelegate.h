@@ -68,6 +68,9 @@ class ClipMonitor;
     IBOutlet NSTextField*       mOSCPortTextField;
     IBOutlet NSTextField*       mOSCStatusField;
     NSInteger mNumberOfInputs;
+// additional interface added
+    IBOutlet NSButton*          mMDNSButton;
+    IBOutlet NSTextField*       mStreamKeyTextField;
 
 	IBMDSwitcherDiscovery*		mSwitcherDiscovery;
 	IBMDSwitcher*				mSwitcher;
