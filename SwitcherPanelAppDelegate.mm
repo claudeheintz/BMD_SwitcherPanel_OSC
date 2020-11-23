@@ -312,6 +312,8 @@ private:
     if ( switcherDefaultOSCPort ) {
         [mOSCPortTextField setStringValue:switcherDefaultOSCPort];
     }
+    
+    [self findSenderConnectionForName:@"*"];
 }
 
 - (void)applicationWillTerminate:(NSNotification*)aNotification

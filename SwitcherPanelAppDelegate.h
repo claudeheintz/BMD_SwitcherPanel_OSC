@@ -97,6 +97,10 @@ class ClipMonitor;
 
 @property (assign) IBOutlet NSWindow *window;
 
+@property (retain) NSString* desiredName;
+@property (retain) NSNetServiceBrowser* browser;
+@property (retain) NSNetService* service;
+
 - (IBAction)connectButtonPressed:(id)sender;
 - (IBAction)cutButtonPressed:(id)sender;
 - (IBAction)autoButtonPressed:(id)sender;

@@ -13,6 +13,14 @@
 #import "LXOSCInterface.h"
 #import "LXOSCMessage.h"
 
+#include <netinet/in.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <termios.h>
+#include <arpa/inet.h>
+
 @implementation SwitcherPanelAppDelegate (OSC_Additions)
 
 #pragma mark OSC Methods
@@ -33,6 +41,9 @@
 - (NSApplicationTerminateReply) applicationShouldTerminate:(NSApplication *)sender {
     if ( [LXOSCInterface sharedOSCInterface] ) {
         [LXOSCInterface closeSharedOSCInterface];
+        
+        [self disconnectService];
+        [self stopBrowser];
     }
     return NSTerminateNow;
 }
@@ -234,4 +245,95 @@
     }
 }
 
+
+#pragma mark bonjour menthods
+
+- (IBAction) mdnsButtonPressed:(id)sender {
+    if ( self.desiredName == NULL ) {
+        [self findSenderConnectionForName:@"*"];
+    }
+}
+
+-(void) findSenderConnectionForName:(NSString*) dname {
+    self.desiredName = dname;
+    if ( ! self.browser ) {
+        self.browser = [[[NSNetServiceBrowser alloc] init] autorelease];
+        [self.browser setDelegate:self];
+        [self.browser searchForServicesOfType:@"_blackmagic._tcp" inDomain:@""];
+        [mOSCStatusField setStringValue:@"searching for switcher..."];
+    }
+}
+
+-(void) stopBrowser {
+    [self.browser setDelegate:NULL];
+    [self.browser stop];
+    self.browser = NULL;
+}
+
+-(void) disconnectService {
+    [self.service setDelegate:NULL];
+    self.service = NULL;
+    self.desiredName = NULL;
+}
+
+
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing
+{
+    NSRange rng = [[aNetService name] rangeOfString:self.desiredName];
+    if ( rng.location != NSNotFound ) {
+        [self attemptToResolveNetService:aNetService];
+    } else if ( [self.desiredName isEqualToString:@"*"] ) {
+        [self attemptToResolveNetService:aNetService];
+    }
+    
+    if ( ! moreComing ) {
+        //[self stopBrowser];
+    }
+}
+
+-(void) attemptToResolveNetService:(NSNetService *)aNetService {
+    self.service = aNetService;
+    [aNetService setDelegate:self];
+    [aNetService resolveWithTimeout:1.0];
+}
+
+- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
+    [self stopBrowser];
+    [self.service setDelegate:NULL];
+    self.service = NULL;
+}
+
+- (void)netServiceDidResolveAddress:(NSNetService *)sender {
+    self.service = sender;
+    
+    NSData* d;
+    NSString* addrstr = NULL;
+    NSString* msg = @"MDNS returned";
+    struct sockaddr_in rv_addr;
+    for ( d in [sender addresses] ) {
+        if ( [d length] == sizeof(rv_addr) ) {
+            rv_addr = *(struct sockaddr_in *)[d bytes];
+            
+            addrstr = [NSString stringWithCString:inet_ntoa(rv_addr.sin_addr) encoding:NSUTF8StringEncoding];
+            
+            msg = [NSString stringWithFormat:@"%@, %@", msg, addrstr];
+            
+            [mAddressTextField setStringValue:addrstr];
+        }
+    }
+    
+    if ( addrstr ) {
+        [mAddressTextField setStringValue:addrstr];
+    }
+    [mOSCStatusField setStringValue:msg];
+
+    [self disconnectService];
+    [self stopBrowser];
+}
+
+
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didNotSearch:(NSDictionary *)errorDict {
+    NSLog(@"NSNetServiceBrowser did not search.");
+    self.desiredName = NULL;
+}
 @end

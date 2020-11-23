@@ -11,9 +11,10 @@
 #import "SwitcherPanelAppDelegate.h"
 #import "LXOSCInterfaceDelegate.h"
 
-@interface SwitcherPanelAppDelegate (OSC_Additions) <LXOSCInterfaceDelegate>
+@interface SwitcherPanelAppDelegate (OSC_Additions) <LXOSCInterfaceDelegate, NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 
 - (IBAction) oscStartStop:(id)sender;
+- (IBAction) mdnsButtonPressed:(id)sender;
 
 -(void) oscDispatchTransition:(NSString*) which arg:(CGFloat)arg;
 
