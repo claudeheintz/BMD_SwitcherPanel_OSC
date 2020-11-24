@@ -15,15 +15,28 @@
 
 - (IBAction) oscStartStop:(id)sender;
 
+-(void) oscDispatchTransition:(NSString*) which arg:(CGFloat)arg;
+-(void) oscDispatchPreview:(NSInteger) index;
+-(void) oscDispatchProgram:(NSInteger) index;
+-(void) oscDispatchMediaSelect:(NSInteger) index;
+-(void) oscDispatchStream:(NSString*) action;
+-(void) oscDispatchRecord:(NSString*) action;
+
 
 - (IBAction)recordStartButtonPressed:(id)sender;
 - (IBAction)recordStopButtonPressed:(id)sender;
 - (IBAction)streamStartButtonPressed:(id)sender;
 - (IBAction)streamStopButtonPressed:(id)sender;
 
-- (IBAction) mdnsButtonPressed:(id)sender;
+-(void) getStreamKey;
+- (IBAction) streamKeyChanged:(id)sender;
 
--(void) oscDispatchTransition:(NSString*) which arg:(CGFloat)arg;
+- (IBAction) mdnsButtonPressed:(id)sender;
+-(void) startSearchingForSwitcher;
+-(void) stopSearchingForSwitcher;
+-(void) findSenderConnectionForName:(NSString*) dname;
+
+
 
 @end
 

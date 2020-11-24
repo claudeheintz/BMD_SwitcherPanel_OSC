@@ -26,6 +26,7 @@
 */
 
 #import "SwitcherPanelAppDelegate.h"
+#import "SwitcherPanelAppDelegate_OSC_Additions.h"
 #import "CallbackMonitors.h"
 #include <libkern/OSAtomic.h>
 #include <stdatomic.h>
@@ -481,6 +482,8 @@ private:
 finish:
 	if (iterator)
 		iterator->Release();
+    
+    [self stopSearchingForSwitcher];
 }
 
 - (void)switcherDisconnected

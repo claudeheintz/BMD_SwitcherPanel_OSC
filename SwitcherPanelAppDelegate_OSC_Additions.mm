@@ -292,17 +292,25 @@
 #pragma mark bonjour menthods
 
 - (IBAction) mdnsButtonPressed:(id)sender {
-    if ( ! self.browser ) {
-        [self findSenderConnectionForName:@"*"];
-        [mOSCStatusField setStringValue:@"searching for switcher..."];
-        [mMDNSButton setTitle:@"Stop Search"];
+    if ( self.browser ) {
+        [self stopSearchingForSwitcher];
     } else {
-        [self disconnectService];
-        [self stopBrowser];
-        [mMDNSButton setTitle:@"Search with Bonjour"];
-        if ( [[mOSCStatusField stringValue] isEqualToString:@"searching for switcher..."] ) {
-            [mOSCStatusField setStringValue:@""];
-        }
+        [self startSearchingForSwitcher];
+    }
+}
+
+-(void) startSearchingForSwitcher {
+    [self findSenderConnectionForName:@"*"];
+    [mOSCStatusField setStringValue:@"searching for switcher..."];
+    [mMDNSButton setTitle:@"Stop Search"];
+}
+
+-(void) stopSearchingForSwitcher {
+    [self disconnectService];
+    [self stopBrowser];
+    [mMDNSButton setTitle:@"Search with Bonjour"];
+    if ( [[mOSCStatusField stringValue] isEqualToString:@"searching for switcher..."] ) {
+        [mOSCStatusField setStringValue:@""];
     }
 }
 
