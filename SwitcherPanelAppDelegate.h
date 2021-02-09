@@ -71,6 +71,9 @@ class ClipMonitor;
 // additional interface added
     IBOutlet NSButton*          mMDNSButton;
     IBOutlet NSTextField*       mStreamKeyTextField;
+    
+    IBOutlet NSButton*          mStartRecordButton;
+    IBOutlet NSButton*          mStartStreamButton;
 
 	IBMDSwitcherDiscovery*		mSwitcherDiscovery;
 	IBMDSwitcher*				mSwitcher;

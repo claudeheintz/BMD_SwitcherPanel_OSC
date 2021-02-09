@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -64,8 +64,52 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Edit" id="3Iu-16-L1E">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Edit" id="gan-DY-be1">
+                        <items>
+                            <menuItem title="Undo" keyEquivalent="z" id="8cb-qy-rZG">
+                                <connections>
+                                    <action selector="undo:" target="-1" id="WpR-z9-xEx"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Redo" keyEquivalent="Z" id="p2I-0e-5T9">
+                                <connections>
+                                    <action selector="redo:" target="-1" id="jsB-sy-plL"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="h3T-cr-QNu"/>
+                            <menuItem title="Cut" keyEquivalent="x" id="Xv4-VN-GSX">
+                                <connections>
+                                    <action selector="cut:" target="-1" id="7Xv-eD-ERx"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Copy" keyEquivalent="c" id="rvC-9r-zQB">
+                                <connections>
+                                    <action selector="copy:" target="-1" id="FcH-J9-dB9"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Paste" keyEquivalent="v" id="Tzw-he-g0S">
+                                <connections>
+                                    <action selector="paste:" target="-1" id="Gqt-FF-1rU"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Delete" id="kVs-96-vIf">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="delete:" target="-1" id="4H4-r8-pVf"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Select All" keyEquivalent="a" id="pt0-0B-gjd">
+                                <connections>
+                                    <action selector="selectAll:" target="-1" id="jsH-gX-qeh"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
             </items>
-            <point key="canvasLocation" x="-223" y="-34"/>
+            <point key="canvasLocation" x="-346" y="-320"/>
         </menu>
         <window title="SwitcherPanel" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
@@ -406,7 +450,7 @@
                                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Uc-qi-FLE">
                                     <rect key="frame" x="99" y="94" width="157" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="hU4-hH-8Q4">
+                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="hU4-hH-8Q4">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -522,6 +566,8 @@
                 <outlet property="mPreviewInputsPopup" destination="574" id="582"/>
                 <outlet property="mProgramInputsPopup" destination="568" id="581"/>
                 <outlet property="mSlider" destination="556" id="587"/>
+                <outlet property="mStartRecordButton" destination="CSs-e8-pGq" id="Jro-tN-4ws"/>
+                <outlet property="mStartStreamButton" destination="BDo-Jf-xbi" id="eFp-jp-V2w"/>
                 <outlet property="mStreamKeyTextField" destination="7Uc-qi-FLE" id="uSD-8F-FyR"/>
                 <outlet property="mSwitcherNameLabel" destination="607" id="609"/>
                 <outlet property="mTransitionFramesTextField" destination="594" id="603"/>

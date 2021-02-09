@@ -259,6 +259,7 @@
     if ( mSwitcherRecord != NULL ) {
         mSwitcherRecord->StopRecording();
     }
+    mStartRecordButton.state = NSOffState;
 }
 
 - (IBAction)streamStartButtonPressed:(id)sender {
@@ -271,6 +272,7 @@
     if ( mSwitcherStream != NULL ) {
         mSwitcherStream->StopStreaming();
     }
+    mStartStreamButton.state = NSOffState;
 }
 
 -(void) getStreamKey {
