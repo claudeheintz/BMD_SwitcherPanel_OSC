@@ -19,6 +19,7 @@
 		513E49582516816300299FDC /* LXOSCTCPInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 513E49532516816300299FDC /* LXOSCTCPInterface.m */; };
 		51771D0F251A783700C673CF /* interface.strings in Resources */ = {isa = PBXBuildFile; fileRef = 51771D0E251A783700C673CF /* interface.strings */; };
 		51771D14251A892D00C673CF /* SwitcherPanelAppDelegate_OSC_Additions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 51771D13251A892D00C673CF /* SwitcherPanelAppDelegate_OSC_Additions.mm */; };
+		51A1797A25D397000084FD86 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51A1797925D397000084FD86 /* Images.xcassets */; };
 		51E72BC4251BC03600F8C943 /* CallbackMonitors.mm in Sources */ = {isa = PBXBuildFile; fileRef = 51E72BC3251BC03600F8C943 /* CallbackMonitors.mm */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -52,6 +53,7 @@
 		51771D0E251A783700C673CF /* interface.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = interface.strings; sourceTree = "<group>"; };
 		51771D12251A892D00C673CF /* SwitcherPanelAppDelegate_OSC_Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitcherPanelAppDelegate_OSC_Additions.h; sourceTree = "<group>"; };
 		51771D13251A892D00C673CF /* SwitcherPanelAppDelegate_OSC_Additions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SwitcherPanelAppDelegate_OSC_Additions.mm; sourceTree = "<group>"; };
+		51A1797925D397000084FD86 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SwitcherPanel/Images.xcassets; sourceTree = "<group>"; };
 		51AA0D36251CE80000C747F2 /* SwitcherPanel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwitcherPanel.entitlements; sourceTree = "<group>"; };
 		51E72BC2251BC03600F8C943 /* CallbackMonitors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallbackMonitors.h; sourceTree = "<group>"; };
 		51E72BC3251BC03600F8C943 /* CallbackMonitors.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CallbackMonitors.mm; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				51A1797925D397000084FD86 /* Images.xcassets */,
 				8D1107310486CEB800E47090 /* SwitcherPanel-Info.plist */,
 				513E49372516651C00299FDC /* InfoPlist.strings */,
 				51771D0E251A783700C673CF /* interface.strings */,
@@ -239,6 +242,7 @@
 			files = (
 				513E49392516651C00299FDC /* MainMenu.xib in Resources */,
 				51308CA62536477800A568D9 /* Credits.html in Resources */,
+				51A1797A25D397000084FD86 /* Images.xcassets in Resources */,
 				512833E52566CC5F004E2C24 /* user_defaults.plist in Resources */,
 				513E493A2516651C00299FDC /* InfoPlist.strings in Resources */,
 				51771D0F251A783700C673CF /* interface.strings in Resources */,
@@ -291,12 +295,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = SwitcherPanel.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 21D0209;
+				CURRENT_PROJECT_VERSION = 21D0215;
 				DEVELOPMENT_TEAM = T95243XU48;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -307,7 +312,7 @@
 				INFOPLIST_FILE = "SwitcherPanel-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.4.2;
+				MARKETING_VERSION = 0.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blackmagic-design.switchers.sdk.switcherpanelosc";
 				PRODUCT_NAME = SwitcherPanel;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -318,11 +323,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_ENTITLEMENTS = SwitcherPanel.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21D0209;
+				CURRENT_PROJECT_VERSION = 21D0215;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = T95243XU48;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -332,7 +338,7 @@
 				INFOPLIST_FILE = "SwitcherPanel-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.4.2;
+				MARKETING_VERSION = 0.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blackmagic-design.switchers.sdk.switcherpanelosc";
 				PRODUCT_NAME = SwitcherPanel;
 				PROVISIONING_PROFILE_SPECIFIER = "";

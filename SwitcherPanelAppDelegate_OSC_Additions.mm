@@ -138,6 +138,13 @@
                     }
                 }
                 
+                else if ( [[addressPattern objectAtIndex:2] isEqualToString:@"streamkey"] ) {
+                    if ( apParts == 4 ) {
+                        [self oscDispatchStreamKey:[addressPattern objectAtIndex:3]
+                                               key:[msg stringAtIndex:0]];
+                    }
+                }
+                
             }
         }
     }
@@ -244,6 +251,15 @@
             }
         }
         
+    }
+}
+
+-(void) oscDispatchStreamKey:(NSString*) action key:(NSString*) skey {
+    if ( mSwitcherStream != NULL ) {
+        if ( [skey length] > 0 ) {
+            [mStreamKeyTextField setStringValue:skey];
+            mSwitcherStream->SetKey((CFStringRef)skey);
+        }
     }
 }
 
