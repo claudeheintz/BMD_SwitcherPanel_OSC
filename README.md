@@ -2,13 +2,13 @@
 
 This project allows you to control a Blackmagic Design ATEM switcher using OSC from an app like TouchOSC or QLab.  The SwitcherPanel app runs on a Mac that is connected to the ATEM.  It listens for OSC messages on a specified network port and controls the ATEM accordingly.
 
+[Click here](https://github.com/claudeheintz/BMD_SwitcherPanel_OSC/blob/master/bin/SwitcherPanel.zip) to download just the pre-build app in a zip file.  (The pre-built app is also found in the `/bin` folder)
+
 This project starts with the **SwitcherPanel** sample from Blackmagic_ATEM_Switchers_SDK_8.4 and adds media selection capability from the SDK's **SwitcherMediaPool** example. Most importantly, it also adds the ability to control the app (and through the app an ATEM) using OSC.
 
 To use the app, you'll need to download and install the ATEM software from **https://www.blackmagicdesign.com/support/** along with the contents of this repository.
 
 To use the source code, you'll want to download the SDK from **https://www.blackmagicdesign.com/developer/**  Either clone or unzip the BMD_SwitcherPanel_OSC-master folder into Blackmagic_ATEM_Switchers_SDK_8.4/Samples
-
-The **/app** folder contains a zipped, pre-built SwitcherPanel application.
   
 The **/extras** folder contains a layout for TouchOSC and a workspace for QLab that illustrate controlling the SwitcherPanel from these applications.
 
@@ -29,6 +29,7 @@ BMD SwitcherPanel OSC Messages:
    Sets the progress of the transition slider from 0 to 100%  
    as determined by the float argument.  
 
+
 `/bmd/switcher/preview/N [float 1.0]`  
    Selects input N as the preview source.  
    The number refers to the row in the popup list,
@@ -48,9 +49,27 @@ BMD SwitcherPanel OSC Messages:
    Selects input N as the program source.  
    The number refers to the row in the popup list,
    starting with the first (black) as row zero. 
+
+  
+`/bmd/switcher/stream/start  [float 1.0]`  
+   Starts streaming. 
    
+`/bmd/switcher/stream/stop  [float 1.0]`  
+   Stops streaming. 
+
+`/bmd/switcher/record/start  [float 1.0]`  
+   Starts recording. 
+   
+`/bmd/switcher/record/stop  [float 1.0]`  
+   Stops recording. 
+ 
+ 
+`/bmd/switcher/streamkey/set [key string]`  
+   Sets the stream key to the string included as an argument.   
+
+
 `/bmd/switcher/media/select N [float 1.0]`  
    Selects slot N from the media pool.  
    The number refers to the row in the popup list,
-   starting with the first (black) as row zero. 
+   starting with the first (black) as row zero.
 
