@@ -989,8 +989,8 @@ finish:
         NSLog(@"Could not get IID_IBMDSwitcherRecordAV interface\n");
     }
     
-    NSLog(@"__got here__");
     [self getStreamKey];
+    [self getStreamURL];
 }
 
 #pragma mark MediaPlayer callbacks

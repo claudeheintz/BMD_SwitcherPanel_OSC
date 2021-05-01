@@ -30,6 +30,8 @@
 
 -(void) getStreamKey;
 - (IBAction) streamKeyChanged:(id)sender;
+-(void) getStreamURL;
+- (IBAction) streamURLChanged:(id)sender;
 
 - (IBAction) mdnsButtonPressed:(id)sender;
 -(void) startSearchingForSwitcher;

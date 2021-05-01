@@ -145,6 +145,13 @@
                     }
                 }
                 
+                else if ( [[addressPattern objectAtIndex:2] isEqualToString:@"streamurl"] ) {
+                    if ( apParts == 4 ) {
+                        [self oscDispatchStreamUrl:[addressPattern objectAtIndex:3]
+                                               url:[msg stringAtIndex:0] serviceName:[msg stringAtIndex:1]];
+                    }
+                }
+                
             }
         }
     }
@@ -256,9 +263,26 @@
 
 -(void) oscDispatchStreamKey:(NSString*) action key:(NSString*) skey {
     if ( mSwitcherStream != NULL ) {
-        if ( [skey length] > 0 ) {
-            [mStreamKeyTextField setStringValue:skey];
-            mSwitcherStream->SetKey((CFStringRef)skey);
+        if ( [action isEqualToString:@"set"] ) {
+            if ( [skey length] > 0 ) {
+                [mStreamKeyTextField setStringValue:skey];
+                mSwitcherStream->SetKey((CFStringRef)skey);
+            }
+        }
+    }
+}
+
+-(void) oscDispatchStreamUrl:(NSString*) action url:(NSString*) ustr serviceName:(NSString*) nstr {
+    if ( mSwitcherStream != NULL ) {
+        if ( [action isEqualToString:@"set"] ) {
+            if ( [ustr length] > 0 ) {
+                [mStreamUrlTextField setStringValue:ustr];
+                mSwitcherStream->SetUrl((CFStringRef)ustr);
+            }
+            if ( [nstr length] > 0 ) {
+                [mStreamServiceNameTextField setStringValue:nstr];
+                mSwitcherStream->SetServiceName((CFStringRef)nstr);
+            }
         }
     }
 }
@@ -303,6 +327,24 @@
     if ( mSwitcherStream != NULL ) {
         NSString* keystring = [mStreamKeyTextField stringValue];
         mSwitcherStream->SetKey((CFStringRef)keystring);
+    }
+}
+
+-(void) getStreamURL {
+    if ( mSwitcherStream != NULL ) {
+        NSString* string;
+        mSwitcherStream->GetUrl((CFStringRef*)&string);
+        [mStreamUrlTextField setStringValue:string];
+        
+        mSwitcherStream->GetServiceName((CFStringRef*)&string);
+        [mStreamServiceNameTextField setStringValue:string];
+    }
+}
+
+- (IBAction) streamURLChanged:(id)sender {
+    if ( mSwitcherStream != NULL ) {
+        NSString* keystring = [mStreamUrlTextField stringValue];
+        mSwitcherStream->SetUrl((CFStringRef)keystring);
     }
 }
 

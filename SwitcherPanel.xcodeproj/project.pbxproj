@@ -301,7 +301,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 21D0215;
+				CURRENT_PROJECT_VERSION = 21D0429;
 				DEVELOPMENT_TEAM = T95243XU48;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -312,7 +312,7 @@
 				INFOPLIST_FILE = "SwitcherPanel-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.4.3;
+				MARKETING_VERSION = 0.4.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blackmagic-design.switchers.sdk.switcherpanelosc";
 				PRODUCT_NAME = SwitcherPanel;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -328,7 +328,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwitcherPanel.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21D0215;
+				CURRENT_PROJECT_VERSION = 21D0429;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = T95243XU48;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -338,7 +338,7 @@
 				INFOPLIST_FILE = "SwitcherPanel-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.4.3;
+				MARKETING_VERSION = 0.4.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blackmagic-design.switchers.sdk.switcherpanelosc";
 				PRODUCT_NAME = SwitcherPanel;
 				PROVISIONING_PROFILE_SPECIFIER = "";
