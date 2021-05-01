@@ -64,9 +64,11 @@ BMD SwitcherPanel OSC Messages:
    Stops recording. 
  
  
-`/bmd/switcher/streamkey/set [key string]`  
+`/bmd/switcher/streamkey/set [string key]`  
    Sets the stream key to the string included as an argument.   
 
+`/bmd/switcher/streamurl/set [string url] [string serviceName]`  
+   Sets the stream url and optionally the service name. 
 
 `/bmd/switcher/media/select N [float 1.0]`  
    Selects slot N from the media pool.  

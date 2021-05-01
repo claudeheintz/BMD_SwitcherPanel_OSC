@@ -38,7 +38,7 @@
 -(void) stopSearchingForSwitcher;
 -(void) findSenderConnectionForName:(NSString*) dname;
 
-
+- (IBAction) audioInputOptionChanged:(id)sender;
 
 @end
 

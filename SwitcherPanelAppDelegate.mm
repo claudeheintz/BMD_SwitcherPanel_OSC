@@ -272,6 +272,7 @@ private:
 	mMixEffectBlock = NULL;
     mSwitcherStream = NULL;
     mSwitcherRecord = NULL;
+    mSwitcherAudioMixer = NULL;
 	
 	mSwitcherMonitor = new SwitcherMonitor(self);
 	mMixEffectBlockMonitor = new MixEffectBlockMonitor(self);
@@ -478,6 +479,7 @@ private:
     
     [self switcherConnected_SwitcherMediaPool];     //initializes intterface to media pool & stills
     [self switcherConnected_RecordStream];          //initializes interface to IBMDSwitcherStreamRTMP and IBMDSwitcherRecordAV
+    [self switcherConnected_Audio];          //initializes interface to IBMDSwitcherStreamRTMP and IBMDSwitcherRecordAV
 	
 finish:
 	if (iterator)
@@ -547,6 +549,11 @@ finish:
     if ( mSwitcherRecord) {
         mSwitcherRecord->Release();
         mSwitcherRecord = NULL;
+    }
+    
+    if ( mSwitcherAudioMixer) {
+        mSwitcherAudioMixer->Release();
+        mSwitcherAudioMixer = NULL;
     }
     
     // <--- end stream/record cleanupConnection
@@ -971,6 +978,81 @@ finish:
     [self enableMediaPlayerButtons:valid];
 }
 
+#pragma mark audio mixer
+
+- (void)switcherConnected_Audio
+{
+    HRESULT result;
+    IBMDSwitcherAudioInputIterator* inputIterator = NULL;
+    
+    result = mSwitcher->QueryInterface(IID_IBMDSwitcherAudioMixer, (void**)&mSwitcherAudioMixer);
+    if (FAILED(result))
+    {
+        NSLog(@"Could not get IID_IBMDSwitcherAudioMixer interface");
+    }
+    else
+    {
+        result =  mSwitcherAudioMixer->CreateIterator(IID_IBMDSwitcherAudioInputIterator,  (void**)&inputIterator);
+        
+        for( int i=0; i<4; i++) {
+            mSwitcherAudioInput[i] = NULL;
+            BMDSwitcherAudioMixOption mixOption;
+            result = inputIterator->Next(&mSwitcherAudioInput[i]);
+            if (FAILED(result))
+            {
+                NSLog(@"Could not get mSwitcherAudioInput %i", i);
+            }
+            else
+            {
+                result = mSwitcherAudioInput[i]->GetMixOption(&mixOption);
+                if ( SUCCEEDED(result) )
+                {
+                    [self setInterfaceForAudioInput:i mixOption:mixOption];
+                }
+            }
+        }
+        
+        inputIterator->Release();
+        inputIterator = NULL;
+    }
+}
+
+-(NSPopUpButton*) popupForAudioInput:(NSInteger) index {
+    if ( index == 0 ) {
+        return mAudioMixOptionPopupOne;
+    }
+    if ( index == 1 ) {
+        return mAudioMixOptionPopupTwo;
+    }
+    if ( index == 2 ) {
+        return mAudioMixOptionPopupThree;
+    }
+    if ( index == 3 ) {
+        return mAudioMixOptionPopupFour;
+    }
+    return NULL;
+}
+
+-(void) setInterfaceForAudioInput:(NSInteger) index mixOption:(BMDSwitcherAudioMixOption) mixOption {
+    NSPopUpButton* popup = [self popupForAudioInput:index];
+    if ( popup ) {
+        if ( mixOption == bmdSwitcherAudioMixOptionOff ) {
+            [popup selectItemAtIndex:0];
+        } else if ( mixOption == bmdSwitcherAudioMixOptionOn ) {
+            [popup selectItemAtIndex:1];
+        } else if ( mixOption == bmdSwitcherAudioMixOptionAudioFollowVideo ) {
+            [popup selectItemAtIndex:2];
+        }
+    }
+    if ( mixOption == bmdSwitcherAudioMixOptionOff ) {
+        NSLog(@"Audio input %li is off", index+1);
+    } else if ( mixOption == bmdSwitcherAudioMixOptionOn ) {
+        NSLog(@"Audio input %li is on", index+1);
+    } else if ( mixOption == bmdSwitcherAudioMixOptionAudioFollowVideo ) {
+        NSLog(@"Audio input %li is AFV", index+1);
+    }
+}
+
 #pragma mark record/stream
 
 - (void)switcherConnected_RecordStream
@@ -992,7 +1074,6 @@ finish:
     [self getStreamKey];
     [self getStreamURL];
 }
-
 #pragma mark MediaPlayer callbacks
 
 - (void)onMediaPlayerSourceChanged

@@ -76,6 +76,10 @@ class ClipMonitor;
     
     IBOutlet NSButton*          mStartRecordButton;
     IBOutlet NSButton*          mStartStreamButton;
+    IBOutlet NSPopUpButton*     mAudioMixOptionPopupOne;
+    IBOutlet NSPopUpButton*     mAudioMixOptionPopupTwo;
+    IBOutlet NSPopUpButton*     mAudioMixOptionPopupThree;
+    IBOutlet NSPopUpButton*     mAudioMixOptionPopupFour;
 
 	IBMDSwitcherDiscovery*		mSwitcherDiscovery;
 	IBMDSwitcher*				mSwitcher;
@@ -101,6 +105,10 @@ class ClipMonitor;
 // additional recording/RTMP support
     IBMDSwitcherStreamRTMP*                  mSwitcherStream;
     IBMDSwitcherRecordAV*                    mSwitcherRecord;
+    
+// additional audioMixer support
+    IBMDSwitcherAudioMixer*                  mSwitcherAudioMixer;
+    IBMDSwitcherAudioInput*                  mSwitcherAudioInput[4];
 }
 
 @property (assign) IBOutlet NSWindow *window;

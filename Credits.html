@@ -25,31 +25,35 @@
 <p class="P2"><span class="T2">website:  </span><a href="https://www.claudeheintzdesign.com/lx/index.html"><span class="T3">claudeheintzdesign.com/lx</span></a></p>
 <p class="P3"> </p>
 <p class="P4">
-/bmd/switcher/transition/cut &nbsp;[1.0]<BR>
-/bmd/switcher/transition/auto [1.0]<BR>
-/bmd/switcher/transition/ftb &nbsp;[1.0]<BR>
-/bmd/switcher/transition/position  [P]<BR><BR>
+/bmd/switcher/transition/cut &nbsp;[float 1.0]<BR>
+/bmd/switcher/transition/auto [float 1.0]<BR>
+/bmd/switcher/transition/ftb &nbsp;[float 1.0]<BR>
+/bmd/switcher/transition/position  [float P = 0.0-1.0]<BR><BR>
 </p>
 <p class="P4">
-/bmd/switcher/preview/N  [1.0]<BR>
-/bmd/switcher/preview [N]<BR>
-/bmd/switcher/program/N  [1.0]<BR>
-/bmd/switcher/program  [N]<BR><BR>
+/bmd/switcher/preview/N  [float 1.0]<BR>
+/bmd/switcher/preview [integer N]<BR>
+/bmd/switcher/program/N  [float 1.0]<BR>
+/bmd/switcher/program  [integer N]<BR><BR>
 </p>
 <p class="P4">
-/bmd/switcher/go/N  [1.0]<BR>
+/bmd/switcher/go/N  [float 1.0]<BR>
 &nbsp;&nbsp;&nbsp;preview->auto<BR><BR>
 </p>
 <p class="P4">
-/bmd/switcher/stream/start  [1.0]<BR>
-/bmd/switcher/stream/stop  [1.0]<BR>
-/bmd/switcher/record/start  [1.0]<BR>
-/bmd/switcher/record/stop  [1.0]<BR><BR>
+/bmd/switcher/stream/start  [float 1.0]<BR>
+/bmd/switcher/stream/stop  [float 1.0]<BR>
+/bmd/switcher/record/start  [float 1.0]<BR>
+/bmd/switcher/record/stop  [float 1.0]<BR><BR>
 </p>
 <p class="P4">
-/bmd/switcher/streamkey/set [key string]<BR><BR>
+/bmd/switcher/streamkey/set [string key]<BR><BR>
+/bmd/switcher/streamurl/set [string url] [string serviceName]<BR><BR>
 </p>
 <p class="P4">
-/bmd/switcher/media/select/N  [1.0]<BR><BR>
+/bmd/switcher/audioinput/N/setoption  [integer option,0=Off, 1=On, 2=AFV]<BR><BR>
+</p>
+<p class="P4">
+/bmd/switcher/media/select/N  [float 1.0]<BR><BR>
 </p>
 </body></html>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -114,14 +114,14 @@
         <window title="SwitcherPanel" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="426" width="728" height="533"/>
+            <rect key="contentRect" x="335" y="426" width="728" height="553"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
             <view key="contentView" id="372">
-                <rect key="frame" x="0.0" y="0.0" width="728" height="533"/>
+                <rect key="frame" x="0.0" y="0.0" width="728" height="553"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="533">
-                        <rect key="frame" x="17" y="496" width="130" height="17"/>
+                        <rect key="frame" x="17" y="516" width="130" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Switcher IP address:" id="534">
                             <font key="font" metaFont="system"/>
@@ -130,7 +130,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="535">
-                        <rect key="frame" x="152" y="494" width="119" height="22"/>
+                        <rect key="frame" x="152" y="514" width="119" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="536">
                             <font key="font" metaFont="system"/>
@@ -139,7 +139,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="537">
-                        <rect key="frame" x="284" y="486" width="96" height="32"/>
+                        <rect key="frame" x="284" y="506" width="96" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Connect" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="538">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -150,7 +150,7 @@
                         </connections>
                     </button>
                     <box autoresizesSubviews="NO" fixedFrame="YES" borderType="line" title="Mix Effect Block 1" translatesAutoresizingMaskIntoConstraints="NO" id="549">
-                        <rect key="frame" x="17" y="224" width="395" height="224"/>
+                        <rect key="frame" x="17" y="244" width="395" height="224"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView" id="CQJ-Qh-nBg">
                             <rect key="frame" x="3" y="3" width="389" height="206"/>
@@ -284,7 +284,7 @@
                         </view>
                     </box>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="607">
-                        <rect key="frame" x="152" y="464" width="222" height="22"/>
+                        <rect key="frame" x="152" y="484" width="222" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="608">
                             <font key="font" metaFont="system"/>
@@ -293,7 +293,7 @@
                         </textFieldCell>
                     </textField>
                     <box autoresizesSubviews="NO" fixedFrame="YES" borderType="line" title="Media Player 1" translatesAutoresizingMaskIntoConstraints="NO" id="i96-qm-DzC">
-                        <rect key="frame" x="11" y="100" width="400" height="108"/>
+                        <rect key="frame" x="11" y="120" width="400" height="108"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView" id="w2j-tB-Y3X">
                             <rect key="frame" x="3" y="3" width="394" height="90"/>
@@ -379,7 +379,7 @@
                         </view>
                     </box>
                     <box autoresizesSubviews="NO" borderType="line" title="Output" id="UKx-bj-Vva">
-                        <rect key="frame" x="414" y="224" width="297" height="224"/>
+                        <rect key="frame" x="414" y="244" width="297" height="224"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView" id="H7X-2z-gQV">
                             <rect key="frame" x="3" y="3" width="291" height="206"/>
@@ -514,7 +514,7 @@
                         </view>
                     </box>
                     <box fixedFrame="YES" title="OSC" translatesAutoresizingMaskIntoConstraints="NO" id="Dqv-Ms-sNN">
-                        <rect key="frame" x="11" y="-4" width="400" height="92"/>
+                        <rect key="frame" x="11" y="16" width="400" height="92"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView" id="7LK-Jq-f4H">
                             <rect key="frame" x="3" y="3" width="394" height="74"/>
@@ -562,7 +562,7 @@
                         </view>
                     </box>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lzr-Op-9Nn">
-                        <rect key="frame" x="269" y="441" width="107" height="16"/>
+                        <rect key="frame" x="269" y="461" width="107" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Search with Bonjour" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Jp2-hL-C8X">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -573,7 +573,7 @@
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="543">
-                        <rect key="frame" x="44" y="466" width="102" height="17"/>
+                        <rect key="frame" x="44" y="486" width="102" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Switcher Name:" id="544">
                             <font key="font" metaFont="system"/>
@@ -581,13 +581,123 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <box fixedFrame="YES" title="Audio" translatesAutoresizingMaskIntoConstraints="NO" id="YHH-zg-B0H">
+                        <rect key="frame" x="414" y="120" width="297" height="108"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <view key="contentView" id="2fI-CN-pMT">
+                            <rect key="frame" x="3" y="3" width="291" height="90"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FGf-5I-Dc6">
+                                    <rect key="frame" x="49" y="27" width="43" height="25"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <popUpButtonCell key="cell" type="push" title="Off" bezelStyle="rounded" alignment="left" controlSize="mini" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="jdi-Px-cqi" id="6qP-Tq-Bgs">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="miniSystem"/>
+                                        <menu key="menu" id="rh0-j0-LD7">
+                                            <items>
+                                                <menuItem title="Off" state="on" id="jdi-Px-cqi"/>
+                                                <menuItem title="On" id="Lhc-3Y-qR2"/>
+                                                <menuItem title="AFV" id="dAL-hV-sQJ"/>
+                                            </items>
+                                        </menu>
+                                    </popUpButtonCell>
+                                </popUpButton>
+                                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="bgO-8o-dXt">
+                                    <rect key="frame" x="99" y="27" width="43" height="25"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <popUpButtonCell key="cell" type="push" title="Off" bezelStyle="rounded" alignment="left" controlSize="mini" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="PW3-VK-pjx" id="ziO-37-K9o">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="miniSystem"/>
+                                        <menu key="menu" id="uKR-PC-Lrc">
+                                            <items>
+                                                <menuItem title="Off" state="on" id="PW3-VK-pjx"/>
+                                                <menuItem title="On" id="nPK-Ws-VJU"/>
+                                                <menuItem title="AFV" id="5mz-th-kft"/>
+                                            </items>
+                                        </menu>
+                                    </popUpButtonCell>
+                                </popUpButton>
+                                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="Hnv-gm-3GB">
+                                    <rect key="frame" x="149" y="27" width="43" height="25"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <popUpButtonCell key="cell" type="push" title="Off" bezelStyle="rounded" alignment="left" controlSize="mini" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="eDK-ix-02e" id="COw-ld-MP9">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="miniSystem"/>
+                                        <menu key="menu" id="xpx-hq-LVV">
+                                            <items>
+                                                <menuItem title="Off" state="on" id="eDK-ix-02e"/>
+                                                <menuItem title="On" id="AD2-KE-Kfn"/>
+                                                <menuItem title="AFV" id="qbS-hB-uP1"/>
+                                            </items>
+                                        </menu>
+                                    </popUpButtonCell>
+                                </popUpButton>
+                                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="Zjt-9L-sWv">
+                                    <rect key="frame" x="199" y="27" width="43" height="25"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <popUpButtonCell key="cell" type="push" title="Off" bezelStyle="rounded" alignment="left" controlSize="mini" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="4zK-P7-9kC" id="qQX-E9-x11">
+                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="miniSystem"/>
+                                        <menu key="menu" id="Kp3-sM-BUi">
+                                            <items>
+                                                <menuItem title="Off" state="on" id="4zK-P7-9kC"/>
+                                                <menuItem title="On" id="mSN-Hw-27m"/>
+                                                <menuItem title="AFV" id="eVN-cP-Tpb"/>
+                                            </items>
+                                        </menu>
+                                    </popUpButtonCell>
+                                </popUpButton>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jiE-3L-Gwe">
+                                    <rect key="frame" x="49" y="50" width="42" height="11"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" controlSize="mini" lineBreakMode="clipping" alignment="center" title="1" id="Lld-De-Efg">
+                                        <font key="font" metaFont="miniSystem"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pAI-Kk-ZxA">
+                                    <rect key="frame" x="99" y="50" width="42" height="11"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" controlSize="mini" lineBreakMode="clipping" alignment="center" title="2" id="spb-8P-UX4">
+                                        <font key="font" metaFont="miniSystem"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4oK-Up-dWH">
+                                    <rect key="frame" x="149" y="50" width="42" height="11"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" controlSize="mini" lineBreakMode="clipping" alignment="center" title="3" id="aqL-ug-xc2">
+                                        <font key="font" metaFont="miniSystem"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41j-LN-lWq">
+                                    <rect key="frame" x="199" y="50" width="42" height="11"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" controlSize="mini" lineBreakMode="clipping" alignment="center" title="4" id="i8e-A7-92L">
+                                        <font key="font" metaFont="miniSystem"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                        </view>
+                    </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="-176" y="66.5"/>
+            <point key="canvasLocation" x="-176" y="76.5"/>
         </window>
         <customObject id="494" customClass="SwitcherPanelAppDelegate">
             <connections>
                 <outlet property="mAddressTextField" destination="535" id="542"/>
+                <outlet property="mAudioMixOptionPopupFour" destination="Zjt-9L-sWv" id="obB-OR-gJw"/>
+                <outlet property="mAudioMixOptionPopupOne" destination="FGf-5I-Dc6" id="uxC-9I-CLZ"/>
+                <outlet property="mAudioMixOptionPopupThree" destination="Hnv-gm-3GB" id="AxC-F5-0B0"/>
+                <outlet property="mAudioMixOptionPopupTwo" destination="bgO-8o-dXt" id="kIc-Wr-n2N"/>
                 <outlet property="mAutoButton" destination="564" id="584"/>
                 <outlet property="mConnectButton" destination="537" id="540"/>
                 <outlet property="mCutButton" destination="562" id="585"/>

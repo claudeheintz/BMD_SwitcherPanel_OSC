@@ -152,6 +152,17 @@
                     }
                 }
                 
+                else if ( [[addressPattern objectAtIndex:2] isEqualToString:@"audioinput"] ) {
+                    NSInteger audioInputIndex = [[addressPattern objectAtIndex:3] integerValue];
+                    if ( (audioInputIndex>=0) && (audioInputIndex < 4) ) {
+                        if ( apParts == 5 ) {
+                            if ( [[addressPattern objectAtIndex:4] isEqualToString:@"setoption"] ) {
+                                [self setMixOption:[msg integerAtIndex:0] forAudioInput:audioInputIndex];
+                            }
+                        }
+                    }
+                }
+                
             }
         }
     }
@@ -456,4 +467,29 @@
     NSLog(@"NSNetServiceBrowser did not search.");
     self.desiredName = NULL;
 }
+
+
+#pragma mark audio
+
+-(BMDSwitcherAudioMixOption) mixOptionForIndex:(NSInteger) index {
+    if ( index == 1 ) {
+        return bmdSwitcherAudioMixOptionOn;
+    }
+    if ( index == 2 ) {
+        return bmdSwitcherAudioMixOptionAudioFollowVideo;
+    }
+    return bmdSwitcherAudioMixOptionOff;
+}
+
+-(void) setMixOption:(NSInteger) index forAudioInput:(NSInteger) input {
+    if ( mSwitcherAudioInput[input] ) {
+        mSwitcherAudioInput[input]->SetMixOption([self mixOptionForIndex:index]);
+    }
+}
+
+- (IBAction) audioInputOptionChanged:(id)sender {
+    [self setMixOption:[sender indexOfSelectedItem] forAudioInput:[sender tag]];
+}
+
+
 @end
