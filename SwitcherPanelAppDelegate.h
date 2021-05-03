@@ -107,8 +107,8 @@ class ClipMonitor;
     IBMDSwitcherRecordAV*                    mSwitcherRecord;
     
 // additional audioMixer support
-    IBMDSwitcherAudioMixer*                  mSwitcherAudioMixer;
-    IBMDSwitcherAudioInput*                  mSwitcherAudioInput[4];
+    IBMDSwitcherFairlightAudioMixer*         mSwitcherAudioMixer;
+    IBMDSwitcherFairlightAudioSource*        mSwitcherAudioSource[4];
 }
 
 @property (assign) IBOutlet NSWindow *window;

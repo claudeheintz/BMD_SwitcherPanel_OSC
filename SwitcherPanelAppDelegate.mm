@@ -983,37 +983,71 @@ finish:
 - (void)switcherConnected_Audio
 {
     HRESULT result;
-    IBMDSwitcherAudioInputIterator* inputIterator = NULL;
+    IBMDSwitcherFairlightAudioInputIterator* inputIterator = NULL;
     
-    result = mSwitcher->QueryInterface(IID_IBMDSwitcherAudioMixer, (void**)&mSwitcherAudioMixer);
+    result = mSwitcher->QueryInterface(IID_IBMDSwitcherFairlightAudioMixer, (void**)&mSwitcherAudioMixer);
     if (FAILED(result))
     {
-        NSLog(@"Could not get IID_IBMDSwitcherAudioMixer interface");
+        NSLog(@"Could not get IID_IBMDSwitcherAudioMixer interface %i", result);
     }
     else
     {
-        result =  mSwitcherAudioMixer->CreateIterator(IID_IBMDSwitcherAudioInputIterator,  (void**)&inputIterator);
-        
-        for( int i=0; i<4; i++) {
-            mSwitcherAudioInput[i] = NULL;
+        result =  mSwitcherAudioMixer->CreateIterator(IID_IBMDSwitcherFairlightAudioInputIterator,  (void**)&inputIterator);
+        if ( SUCCEEDED(result) )
+        {
+            IBMDSwitcherFairlightAudioInput* audioInput;
+            BMDSwitcherExternalPortType type;
+            IBMDSwitcherFairlightAudioSourceIterator* sourceIterator = NULL;
             BMDSwitcherAudioMixOption mixOption;
-            result = inputIterator->Next(&mSwitcherAudioInput[i]);
-            if (FAILED(result))
-            {
-                NSLog(@"Could not get mSwitcherAudioInput %i", i);
+            
+            // first iterate through audio inputs to find hdmi inputs
+            // then, for each input, iterate to get its first source
+            // save the source and get its mix option
+            
+            int i = 0;
+            for( int j=0; j<4; j++) {
+                mSwitcherAudioSource[j] = NULL;
             }
-            else
-            {
-                result = mSwitcherAudioInput[i]->GetMixOption(&mixOption);
-                if ( SUCCEEDED(result) )
+            
+            while ((S_OK == inputIterator->Next(&audioInput)) && ( i < 4 )) {
+                // check input to see if it is HDMI
+                result = audioInput->GetCurrentExternalPortType(&type);
+                
+                if (SUCCEEDED(result) && ( type == bmdSwitcherExternalPortTypeHDMI ))
                 {
-                    [self setInterfaceForAudioInput:i mixOption:mixOption];
-                }
-            }
+                    result = audioInput->CreateIterator(IID_IBMDSwitcherFairlightAudioSourceIterator, (void**)&sourceIterator);
+                    if (SUCCEEDED(result))
+                    {
+                        result = sourceIterator->Next(&mSwitcherAudioSource[i]);
+                        if ( SUCCEEDED(result) )
+                        {
+                            result = mSwitcherAudioSource[i]->GetMixOption(&mixOption);
+                            if ( SUCCEEDED(result) )
+                            {
+                                [self setInterfaceForAudioInput:i mixOption:mixOption];
+                            }
+                            else
+                            {
+                                NSLog(@"Failed to get audioSource mixOption");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        NSLog(@"Could not get mSwitcherAudioSource %i", i+1);
+                    }
+                    
+                    i++;    // increase i even if source/mixOption not available
+                }           // port type is HDMI
+            }               // while next input
+            
+            inputIterator->Release();
+            inputIterator = NULL;
         }
-        
-        inputIterator->Release();
-        inputIterator = NULL;
+        else
+        {
+            NSLog(@"Could not get mSwitcherAudioInputIterator");
+        }
     }
 }
 
@@ -1036,19 +1070,19 @@ finish:
 -(void) setInterfaceForAudioInput:(NSInteger) index mixOption:(BMDSwitcherAudioMixOption) mixOption {
     NSPopUpButton* popup = [self popupForAudioInput:index];
     if ( popup ) {
-        if ( mixOption == bmdSwitcherAudioMixOptionOff ) {
+        if ( mixOption == bmdSwitcherFairlightAudioMixOptionOff ) {
             [popup selectItemAtIndex:0];
-        } else if ( mixOption == bmdSwitcherAudioMixOptionOn ) {
+        } else if ( mixOption == bmdSwitcherFairlightAudioMixOptionOn ) {
             [popup selectItemAtIndex:1];
-        } else if ( mixOption == bmdSwitcherAudioMixOptionAudioFollowVideo ) {
+        } else if ( mixOption == bmdSwitcherFairlightAudioMixOptionAudioFollowVideo ) {
             [popup selectItemAtIndex:2];
         }
     }
-    if ( mixOption == bmdSwitcherAudioMixOptionOff ) {
+    if ( mixOption == bmdSwitcherFairlightAudioMixOptionOff ) {
         NSLog(@"Audio input %li is off", index+1);
-    } else if ( mixOption == bmdSwitcherAudioMixOptionOn ) {
+    } else if ( mixOption == bmdSwitcherFairlightAudioMixOptionOn ) {
         NSLog(@"Audio input %li is on", index+1);
-    } else if ( mixOption == bmdSwitcherAudioMixOptionAudioFollowVideo ) {
+    } else if ( mixOption == bmdSwitcherFairlightAudioMixOptionAudioFollowVideo ) {
         NSLog(@"Audio input %li is AFV", index+1);
     }
 }

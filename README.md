@@ -69,6 +69,9 @@ BMD SwitcherPanel OSC Messages:
 
 `/bmd/switcher/streamurl/set [string url] [string serviceName]`  
    Sets the stream url and optionally the service name. 
+   
+`/bmd/switcher/audioinput/N/setoption  [integer option, 0=Off, 1=On, 2=AFV]`  
+   Set audio input option for the 4 hdmi inputs. 
 
 `/bmd/switcher/media/select N [float 1.0]`  
    Selects slot N from the media pool.  

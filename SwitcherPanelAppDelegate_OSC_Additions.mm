@@ -473,17 +473,17 @@
 
 -(BMDSwitcherAudioMixOption) mixOptionForIndex:(NSInteger) index {
     if ( index == 1 ) {
-        return bmdSwitcherAudioMixOptionOn;
+        return bmdSwitcherFairlightAudioMixOptionOn;
     }
     if ( index == 2 ) {
-        return bmdSwitcherAudioMixOptionAudioFollowVideo;
+        return bmdSwitcherFairlightAudioMixOptionAudioFollowVideo;
     }
-    return bmdSwitcherAudioMixOptionOff;
+    return bmdSwitcherFairlightAudioMixOptionOff;
 }
 
 -(void) setMixOption:(NSInteger) index forAudioInput:(NSInteger) input {
-    if ( mSwitcherAudioInput[input] ) {
-        mSwitcherAudioInput[input]->SetMixOption([self mixOptionForIndex:index]);
+    if ( mSwitcherAudioSource[input] ) {
+        mSwitcherAudioSource[input]->SetMixOption([self mixOptionForIndex:index]);
     }
 }
 
