@@ -87,6 +87,7 @@ public:
     
     HRESULT Notify(BMDSwitcherFairlightAudioSourceEventType eventType)
     {
+        NSLog(@"__ notify called");
         switch (eventType)
         {
             case bmdSwitcherFairlightAudioSourceEventTypeMixOptionChanged:
@@ -346,7 +347,7 @@ private:
 	
 	mSwitcherMonitor = new SwitcherMonitor(self);
 	mMixEffectBlockMonitor = new MixEffectBlockMonitor(self);
-    mAudioSourceMonitor = new AudioSourceMonitor(self);
+    mAudioSourceMonitor = NULL; //created when switcher is connected
 	
 	mMoveSliderDownwards = false;
 	mCurrentTransitionReachedHalfway = false;
@@ -1071,6 +1072,10 @@ finish:
     HRESULT result;
     IBMDSwitcherFairlightAudioInputIterator* inputIterator = NULL;
     
+    if ( mAudioSourceMonitor == NULL ) {
+        mAudioSourceMonitor = new AudioSourceMonitor(self);
+    }
+    
     result = mSwitcher->QueryInterface(IID_IBMDSwitcherFairlightAudioMixer, (void**)&mSwitcherAudioMixer);
     if (FAILED(result))
     {
@@ -1166,6 +1171,7 @@ finish:
             [popup selectItemAtIndex:2];
         }
     }
+    /*
     if ( mixOption == bmdSwitcherFairlightAudioMixOptionOff ) {
         NSLog(@"Audio input %li is off", index+1);
     } else if ( mixOption == bmdSwitcherFairlightAudioMixOptionOn ) {
@@ -1173,6 +1179,7 @@ finish:
     } else if ( mixOption == bmdSwitcherFairlightAudioMixOptionAudioFollowVideo ) {
         NSLog(@"Audio input %li is AFV", index+1);
     }
+     */
 }
 
 #pragma mark record/stream
