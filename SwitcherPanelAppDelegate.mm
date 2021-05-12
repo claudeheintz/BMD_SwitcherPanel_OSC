@@ -37,6 +37,76 @@ static inline bool	operator== (const REFIID& iid1, const REFIID& iid2)
 	return CFEqual(&iid1, &iid2);
 }
 
+// Callback class for monitoring property changes on an audio input source
+class AudioSourceMonitor : public IBMDSwitcherFairlightAudioSourceCallback
+{
+public:
+    AudioSourceMonitor(SwitcherPanelAppDelegate* uiDelegate) : mUiDelegate(uiDelegate), mRefCount(1) { }
+
+protected:
+    virtual ~AudioSourceMonitor() { }
+
+public:
+    HRESULT STDMETHODCALLTYPE QueryInterface(REFIID iid, LPVOID *ppv)
+    {
+        if (!ppv)
+            return E_POINTER;
+        
+        if (iid == IID_IBMDSwitcherMixEffectBlockCallback)
+        {
+            *ppv = static_cast<IBMDSwitcherFairlightAudioSourceCallback*>(this);
+            AddRef();
+            return S_OK;
+        }
+        
+        if (CFEqual(&iid, IUnknownUUID))
+        {
+            *ppv = static_cast<IUnknown*>(this);
+            AddRef();
+            return S_OK;
+        }
+        
+        *ppv = NULL;
+        return E_NOINTERFACE;
+    }
+
+    ULONG STDMETHODCALLTYPE AddRef(void)
+    {
+        return  atomic_fetch_add_explicit((atomic_int*)&mRefCount, 1, memory_order_relaxed );
+        //return ::OSAtomicIncrement32(&mRefCount);
+    }
+
+    ULONG STDMETHODCALLTYPE Release(void)
+    {
+        int newCount = atomic_fetch_sub_explicit((atomic_int*)&mRefCount, 1, memory_order_relaxed);
+        //int newCount = ::OSAtomicDecrement32(&mRefCount);
+        if (newCount == 0)
+            delete this;
+        return newCount;
+    }
+    
+    HRESULT Notify(BMDSwitcherFairlightAudioSourceEventType eventType)
+    {
+        switch (eventType)
+        {
+            case bmdSwitcherFairlightAudioSourceEventTypeMixOptionChanged:
+                [mUiDelegate performSelectorOnMainThread:@selector(updateInterfaceForMixAudioOptions) withObject:nil waitUntilDone:YES];
+                break;
+            default:    // ignore other property changes not used for this sample app
+                break;
+        }
+        return S_OK;
+    }
+    
+    HRESULT OutputLevelNotification (/* in */ uint32_t numLevels, /* in */ const double* levels /* in dBFS */, /* in */ uint32_t numPeakLevels, /* in */ const double* peakLevels /* in dBFS */) {
+        return 0;
+    }
+
+private:
+    SwitcherPanelAppDelegate*        mUiDelegate;
+    int                                mRefCount;
+};
+
 // Callback class for monitoring property changes on a mix effect block.
 class MixEffectBlockMonitor : public IBMDSwitcherMixEffectBlockCallback
 {
@@ -276,6 +346,7 @@ private:
 	
 	mSwitcherMonitor = new SwitcherMonitor(self);
 	mMixEffectBlockMonitor = new MixEffectBlockMonitor(self);
+    mAudioSourceMonitor = new AudioSourceMonitor(self);
 	
 	mMoveSliderDownwards = false;
 	mCurrentTransitionReachedHalfway = false;
@@ -324,6 +395,11 @@ private:
     if ( mMixEffectBlockMonitor ) {
         mMixEffectBlockMonitor->Release();
         mMixEffectBlockMonitor = NULL;
+    }
+    
+    if ( mAudioSourceMonitor ) {
+        mAudioSourceMonitor->Release();
+        mAudioSourceMonitor = NULL;
     }
 
 	if (mSwitcherDiscovery)
@@ -510,6 +586,16 @@ finish:
 		mMixEffectBlock->Release();
 		mMixEffectBlock = NULL;
 	}
+    
+    if ( mAudioSourceMonitor ) {
+        for (int i=0; i<4; i++) {
+            if ( mSwitcherAudioSource[i] ) {
+                mSwitcherAudioSource[i]->RemoveCallback(mAudioSourceMonitor);
+            }
+        }
+        mAudioSourceMonitor->Release();
+        mAudioSourceMonitor = NULL;
+    }
     
     // <--- begin from SwitcherMediaPool cleanupConnection
     
@@ -816,7 +902,7 @@ finish:
     
 }
 
-- (void)updateMediaPopupItems:(NSPopUpButton*)comboBox;
+- (void)updateMediaPopupItems:(NSPopUpButton*)comboBox
 {
     HRESULT result;
     uint32_t stillCount;
@@ -892,7 +978,7 @@ finish:
     [comboBox selectItemAtIndex:comboIndex];
 }
 
-- (void)updateMediaPlayerPopupSelection;
+- (void) updateMediaPlayerPopupSelection
 {
     // This method sets the media player combo box selected
     // item to the source of the media player and sets the
@@ -1021,6 +1107,8 @@ finish:
                         result = sourceIterator->Next(&mSwitcherAudioSource[i]);
                         if ( SUCCEEDED(result) )
                         {
+                            mSwitcherAudioSource[i]->AddCallback(mAudioSourceMonitor);
+                            
                             result = mSwitcherAudioSource[i]->GetMixOption(&mixOption);
                             if ( SUCCEEDED(result) )
                             {

@@ -154,10 +154,10 @@
                 
                 else if ( [[addressPattern objectAtIndex:2] isEqualToString:@"audioinput"] ) {
                     NSInteger audioInputIndex = [[addressPattern objectAtIndex:3] integerValue];
-                    if ( (audioInputIndex>=0) && (audioInputIndex < 4) ) {
+                    if ( (audioInputIndex>0) && (audioInputIndex < 5) ) {
                         if ( apParts == 5 ) {
                             if ( [[addressPattern objectAtIndex:4] isEqualToString:@"setoption"] ) {
-                                [self setMixOption:[msg integerAtIndex:0] forAudioInput:audioInputIndex];
+                                [self setMixOption:[msg integerAtIndex:0] forAudioInput:audioInputIndex-1]; //zero  based index for input
                             }
                         }
                     }
@@ -471,6 +471,17 @@
 
 #pragma mark audio
 
+-(void) updateInterfaceForMixAudioOptions {
+    for ( NSInteger input=0 ; input<4; input++) {
+        BMDSwitcherAudioMixOption mixOption;
+        HRESULT result = mSwitcherAudioSource[input]->GetMixOption(&mixOption);
+        if ( SUCCEEDED(result) )
+        {
+            [self setInterfaceForAudioInput:input mixOption:mixOption];
+        }
+    }
+}
+
 -(BMDSwitcherAudioMixOption) mixOptionForIndex:(NSInteger) index {
     if ( index == 1 ) {
         return bmdSwitcherFairlightAudioMixOptionOn;
@@ -484,6 +495,20 @@
 -(void) setMixOption:(NSInteger) index forAudioInput:(NSInteger) input {
     if ( mSwitcherAudioSource[input] ) {
         mSwitcherAudioSource[input]->SetMixOption([self mixOptionForIndex:index]);
+        switch ( input) {
+            case 0:
+                [mAudioMixOptionPopupOne selectItemAtIndex:index];
+                break;
+            case 1:
+                [mAudioMixOptionPopupTwo selectItemAtIndex:index];
+                break;
+            case 2:
+                [mAudioMixOptionPopupThree selectItemAtIndex:index];
+                break;
+            case 3:
+                [mAudioMixOptionPopupFour selectItemAtIndex:index];
+                break;
+        }
     }
 }
 

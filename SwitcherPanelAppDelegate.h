@@ -33,6 +33,7 @@
 
 class MixEffectBlockMonitor;
 class SwitcherMonitor;
+class AudioSourceMonitor;
 class InputMonitor;
 class MediaPlayerMonitor;
 class StillsMonitor;
@@ -84,6 +85,7 @@ class ClipMonitor;
 	IBMDSwitcherDiscovery*		mSwitcherDiscovery;
 	IBMDSwitcher*				mSwitcher;
 	IBMDSwitcherMixEffectBlock*	mMixEffectBlock;
+    AudioSourceMonitor*         mAudioSourceMonitor;
 	MixEffectBlockMonitor*		mMixEffectBlockMonitor;
 	SwitcherMonitor*			mSwitcherMonitor;
 	std::list<InputMonitor*>	mInputMonitors;
@@ -140,10 +142,20 @@ class ClipMonitor;
 
 // SwitcherMediaPool Example
 - (void) switcherConnected_SwitcherMediaPool;
+- (void)enableMediaPlayerButtons:(bool)enabled;
+- (void)updateMediaPopupItems:(NSPopUpButton*)comboBox;
+- (void) updateMediaPlayerPopupSelection;
 
-- (void) selectMediaPlayerSource:(uint32_t) mpIndex;
+// Fairlight Audio
+- (void)switcherConnected_Audio;
+-(NSPopUpButton*) popupForAudioInput:(NSInteger) index;
+-(void) setInterfaceForAudioInput:(NSInteger) index mixOption:(BMDSwitcherAudioMixOption) mixOption;
+
+// Recording and Streaming
+- (void)switcherConnected_RecordStream;
 
 - (void)onMediaPlayerSourceChanged;
+- (void) selectMediaPlayerSource:(uint32_t) mpIndex;
 - (void)onMediaPlayerPlayingChanged;
 - (void)onMediaPlayerBeginChanged;
 - (void)onMediaPlayerLoopChanged;

@@ -38,6 +38,9 @@
 -(void) stopSearchingForSwitcher;
 -(void) findSenderConnectionForName:(NSString*) dname;
 
+-(void) updateInterfaceForMixAudioOptions;
+-(BMDSwitcherAudioMixOption) mixOptionForIndex:(NSInteger) index;
+-(void) setMixOption:(NSInteger) index forAudioInput:(NSInteger) input;
 - (IBAction) audioInputOptionChanged:(id)sender;
 
 @end
